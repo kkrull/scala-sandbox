@@ -1,6 +1,6 @@
 package com.github.kkrull.scala.scalatraits
 
-import java.awt.geom._
+import java.awt.geom.Ellipse2D
 
 trait RectangleLike { this: Ellipse2D.Double =>
   def grow(x: Int, y: Int): Unit = {

@@ -1,7 +1,7 @@
 package com.github.kkrull.scala.scalatraits
 
 import org.scalatest._
-import java.awt.geom._
+import java.awt.geom.Ellipse2D
 
 class TraitExerciseSpecs extends FunSpec 
   with Matchers
