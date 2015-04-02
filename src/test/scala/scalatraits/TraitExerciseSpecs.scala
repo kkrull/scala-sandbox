@@ -3,10 +3,7 @@ package com.github.kkrull.scala.scalatraits
 import org.scalatest._
 import java.awt.geom.Ellipse2D
 
-class TraitExerciseSpecs extends FunSpec 
-  with Matchers
-  with BeforeAndAfter {
-
+class TraitExerciseSpecs extends FunSpec with Matchers {
   describe("RectangleLike") {
     describe(".translate") {
       val subject = new Ellipse2D.Double(1, 2, 4, 8) with RectangleLike
