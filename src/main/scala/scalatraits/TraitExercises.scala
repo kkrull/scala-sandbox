@@ -2,6 +2,7 @@ package com.github.kkrull.scala.scalatraits
 
 import java.awt.geom.Ellipse2D
 import java.io.InputStream
+import java.awt.Point
 
 trait RectangleLike { this: Ellipse2D.Double =>
   def grow(x: Int, y: Int): Unit = {
@@ -10,6 +11,10 @@ trait RectangleLike { this: Ellipse2D.Double =>
 
   def translate(x: Int, y: Int): Unit = {
     this.setFrame(this.getX + x, this.getY + y, this.getWidth, this.getHeight)
+  }
+
+  def center: Unit = {
+    this.setFrame(0, 0, this.getWidth, this.getHeight)
   }
 }
 
@@ -27,3 +32,25 @@ trait BufferedInput extends InputStream {
     buffer(bufferIndex) //TODO KDK: Shouldn't this cause the second read to fail?  The index is not being incremented
   }
 }
+
+class OrderedPoint(x: Int, y: Int) extends Point(x, y) with Ordered[Point] {
+  def compare(that: Point): Int = {
+    def compareDouble(one: Double, other: Double) = {
+      if(one < other) -1
+      else if(one > other) 1
+      else 0
+    }
+
+    val xComparison = compareDouble(getX, that.getX)
+    if(xComparison != 0)
+      xComparison
+    else
+      compareDouble(getY, that.getY)
+  } 
+}
+
+//object Go extends App {
+//  val base = new OrderedPoint(1, 2)
+//  val array = Array(base)
+//  scala.util.Sorting.quickSort(array)
+//}

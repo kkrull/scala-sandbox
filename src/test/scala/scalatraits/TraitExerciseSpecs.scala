@@ -9,7 +9,6 @@ class RectangleLikeSpec extends FunSpec with Matchers {
   describe(".translate") {
     trait Fixture {
       val subject = new Ellipse2D.Double(1, 2, 4, 8) with RectangleLike
-      info("Translating")
       subject.translate(16, -32)
     }
 
@@ -38,6 +37,15 @@ class RectangleLikeSpec extends FunSpec with Matchers {
     it("changes the side by the amount specified for each dimension") {
       subject.getWidth shouldEqual 20
       subject.getHeight shouldEqual 40
+    }
+  }
+
+  describe(".center") {
+    it("moves the object to 0,0") {
+      val subject = new Ellipse2D.Double(1, 2, 4, 8) with RectangleLike
+      subject.center
+      subject.getX shouldEqual 0
+      subject.getY shouldEqual 0
     }
   }
 }
@@ -75,6 +83,32 @@ class BufferedInputSpec extends FunSpec with Matchers {
         val subject = new ByteArrayInputStream(Array[Byte]()) with BufferedInput
         subject.read should equal(-1) 
       }
+    }
+  }
+}
+
+class OrderedPointSpec extends FunSpec with Matchers {
+  val base = new OrderedPoint(1, 2)
+  val lowX = new OrderedPoint(0, 2)
+
+  it("uses the given x,y points") {
+    base.getX should equal(1)
+    base.getY should equal(2)
+  }
+
+  describe(".compare") {
+    describe("given the same instance") {
+      it("returns 0") { base.compare(base) should equal(0) }
+    }
+
+    describe("given a point with a lower x value") {
+      val array: Array[OrderedPoint] = Array(base, lowX)
+
+//      it("sorts lower") {
+//        scala.util.Sorting.quickSort[OrderedPoint](array)
+//        array(0) should be(lowX)
+//        array(1) should be(base)
+//      }
     }
   }
 }
