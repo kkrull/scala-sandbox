@@ -11,3 +11,6 @@ trait RectangleLike { this: Ellipse2D.Double =>
     this.setFrame(this.getX + x, this.getY + y, this.getWidth, this.getHeight)
   }
 }
+
+trait BufferedInput {
+}
