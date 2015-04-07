@@ -14,5 +14,4 @@ trait RectangleLike { this: Ellipse2D.Double =>
 }
 
 trait BufferedInput { this: InputStream =>
-  override def read: Int = 42
 }

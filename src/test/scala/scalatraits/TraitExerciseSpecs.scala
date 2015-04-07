@@ -45,14 +45,18 @@ class RectangleLikeSpec extends FunSpec with Matchers {
 class BufferedInputSpec extends FunSpec with Matchers {
   describe(".read") {
     describe("when the buffer is empty") {
-      val subject = new InputStream with BufferedInput {
-        var numReads = 0
-        override def read: Int = {
-          numReads += 1
-          42
+      class InputStreamSpy extends InputStream {
+        private var _numReads: Int = 0
+        def numReads = _numReads
+
+        def read: Int = {
+          _numReads = _numReads + 1
+          4
         }
-      } 
-      
+      }
+
+      val subject = new InputStreamSpy with BufferedInput       
+
       it("calls InputStream.read enough times to fill the buffer") {
         subject.read
         subject.numReads should equal(2)
