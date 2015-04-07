@@ -3,6 +3,7 @@ package com.github.kkrull.scala.scalatraits
 import org.scalatest._
 import java.awt.geom.Ellipse2D
 import java.io.ByteArrayInputStream
+import java.io.InputStream
 
 class RectangleLikeSpec extends FunSpec with Matchers {
   describe(".translate") {
@@ -43,19 +44,34 @@ class RectangleLikeSpec extends FunSpec with Matchers {
 
 class BufferedInputSpec extends FunSpec with Matchers {
   describe(".read") {
-    describe("when the stream has more data") {
-      val subject = new ByteArrayInputStream(Array[Byte](42, 43)) with BufferedInput
+    describe("when the buffer is empty") {
+      val subject = new InputStream with BufferedInput {
+        var numReads = 0
+        override def read: Int = {
+          numReads += 1
+          42
+        }
+      } 
       
+      it("calls InputStream.read enough times to fill the buffer") {
+        subject.read
+        subject.numReads should equal(2)
+      }
+    }
+
+    describe("when the stream has more data") {
       it("returns the next byte in the stream") {
+        val subject = new ByteArrayInputStream(Array[Byte](42, 43)) with BufferedInput
         subject.read should equal(42)
         subject.read should equal(43)
       }
     }
 
     describe("when the stream is exhausted") {
-      val subject = new ByteArrayInputStream(Array[Byte]()) with BufferedInput
-
-      it("returns -1") { subject.read should equal(-1) }
+      it("returns -1") {
+        val subject = new ByteArrayInputStream(Array[Byte]()) with BufferedInput
+        subject.read should equal(-1) 
+      }
     }
   }
 }

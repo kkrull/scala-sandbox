@@ -1,6 +1,7 @@
 package com.github.kkrull.scala.scalatraits
 
 import java.awt.geom.Ellipse2D
+import java.io.InputStream
 
 trait RectangleLike { this: Ellipse2D.Double =>
   def grow(x: Int, y: Int): Unit = {
@@ -12,5 +13,6 @@ trait RectangleLike { this: Ellipse2D.Double =>
   }
 }
 
-trait BufferedInput {
+trait BufferedInput { this: InputStream =>
+  override def read: Int = 42
 }
