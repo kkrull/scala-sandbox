@@ -13,5 +13,17 @@ trait RectangleLike { this: Ellipse2D.Double =>
   }
 }
 
-trait BufferedInput { this: InputStream =>
+trait BufferedInput extends InputStream { 
+  private var buffer = Array[Int](-1, -1) 
+  private var bufferIndex = buffer.length
+
+  def bufferedRead: Int = {
+    if(bufferIndex == buffer.length) {
+      buffer(0) = read
+      buffer(1) = read
+      bufferIndex = 0
+    }
+
+    buffer(bufferIndex) //TODO KDK: Shouldn't this cause the second read to fail?  The index is not being incremented
+  }
 }
