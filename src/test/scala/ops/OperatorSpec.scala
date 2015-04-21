@@ -3,14 +3,22 @@ import org.scalatest._
 
 class FractionSpec extends FunSpec with Matchers {
   describe("::apply") {
-    //TODO KDK: Is there a way to move this behavior into the constructor?
     it("it normalizes the sign onto the numerator") {
-      val Fraction(2, 3) = Fraction(2, 3)
-      val Fraction(-2, 3) = Fraction(-2, 3)
-      val Fraction(-2, 3) = Fraction(2, -3)
-      val Fraction(2, 3) = Fraction(-2, -3)
+      shouldReduceTo(Fraction(2, 3), 2, 3)
+      shouldReduceTo(Fraction(-2, 3), -2, 3)
+      shouldReduceTo(Fraction(2, -3), -2, 3)
+      shouldReduceTo(Fraction(-2, -3), 2, 3)
+      shouldReduceTo(Fraction(-4, -2), 2, 1)
     }
-    it("it gcds") { pending }
+    it("it reduces using the greatest common denominator") { 
+      shouldReduceTo(Fraction(1, 1), 1, 1)
+      shouldReduceTo(Fraction(2, 2), 1, 1)
+      shouldReduceTo(Fraction(2, 4), 1, 2)
+    }
+
+    def shouldReduceTo(frac: Fraction, n: Int, d: Int): Unit = {
+      (frac.numerator, frac.denominator) should equal((n, d))
+    }
   }
 
   describe("::unapply") {
