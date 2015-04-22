@@ -30,7 +30,7 @@ class Yen(private val quantity: Int) {
   def cents: Int = Math.abs(quantity % 100)
 
   def +(other: Yen): Yen = new Yen(this.quantity + other.quantity)
-  dsdfef -(other: Yen): Yen = new Yen(this.quantity - other.quantity)
+  def -(other: Yen): Yen = new Yen(this.quantity - other.quantity)
   //def *(multiplicity: Int): Yen = Yen(this.dollars * multiplicity, this.cents * multiplicity)
   //def /(divisor: Int): Yen = {
   //  val totalCents = this.dollars * 100 + this.cents
