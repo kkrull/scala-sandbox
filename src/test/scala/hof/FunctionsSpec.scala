@@ -23,15 +23,51 @@ class FunctionSpec extends FunSpec with Matchers {
   }
 
   //Problem 2
-  describe(".largest") {
+  describe(".largestValue") {
     it("returns the largest value in the given array") {
-      Hof.largest(Array(3, 1, 4)) should equal(4)
+      Hof.largestValue(Array(3, 1, 4)) should equal(4)
     }
   }
 
   //Problem 3
-  describe(".factorial") {
-    it("returns the result of multiplying the sequence of values 1..n") {
+  describe(".fact") {
+    describe("given 0") {
+      it("returns 1") { Hof.fact(0) should equal(1) }
+    }
+
+    describe("given n > 0") { 
+      it("returns the result of multiplying the sequence of values 1..n") { Hof.fact(3) should equal(6) } 
+    }
+  }
+
+  //Problem 4
+  describe(".factFold") {
+    describe("given 0") {
+      it("returns 1") { Hof.factFold(0) should equal(1) }
+    }
+
+    describe("given n > 0") { 
+      it("returns the result of multiplying the sequence of values 1..n") { Hof.factFold(3) should equal(6) } 
+    }
+  }
+
+  //Problem 5
+  describe(".largest") {
+    describe("given an empty sequence") {
+      it("returns None") {
+        Hof.largest((x: Int) => x, 1 to 0) should equal(None)
+      }
+    }
+
+    describe("given a non-empty sequence") {
+      it("returns the largest result of the given function when applied to the given inputs") {
+        Hof.largest((x: Int) => 10 * x - x * x, 1 to 10) should equal(Some(25))
+      }
+    }
+  }
+
+  describe(".largestAt") {
+    it("exists") {
       pending
     }
   }
