@@ -66,9 +66,24 @@ class FunctionSpec extends FunSpec with Matchers {
     }
   }
 
+  //Problem 6
   describe(".largestAt") {
-    it("exists") {
-      pending
+    describe("given an empty sequence") {
+      it("returns None") {
+        Hof.largestAt((x: Int) => x*x, List(1, 2, 3)) should equal(None)
+      }
+    }
+
+    describe("given a sequence of all the same output value") {
+      it("returns the index of the first such value") {
+        Hof.largestAt((x: Int) => 42, List(1, 2, 3)) should equal(Some(0))
+      }
+    }
+
+    describe("given a sequence of different output values") {
+      it("returns the first index of the largest output value") {
+        pending
+      }
     }
   }
 }

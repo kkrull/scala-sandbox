@@ -30,6 +30,25 @@ object Hof {
       Some(inputs.map(f).reduceLeft(Math.max))
   }
 
+  def largestAt(f: (Int) => Int, inputs: Seq[Int]): Option[Int] = {
+    if(inputs.isEmpty)
+      None
+    else {
+      var index = -1
+      val max: (Int, Int) = inputs
+        .map(f)
+        .foldLeft((index, Int.MinValue)) { (acc: (Int, Int), x: Int) => 
+          index += 1
+          if(x > acc._2)
+            (index, x)
+          else
+            acc
+        }
+
+      Some(max._1)
+    }
+  }
+
   class InvalidRangeException(from: Int, to: Int) 
     extends RuntimeException("from value %d is greater than to value %d".format(from, to)) 
     { /* empty */ }
