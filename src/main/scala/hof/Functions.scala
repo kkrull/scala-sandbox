@@ -3,6 +3,12 @@ package com.github.kkrull.scala.hof
 /** Higher-order functions */
 object Hof {
   def values(f: (Int) => Int, from: Int, to: Int): Seq[(Int, Int)] = {
+    val input = from.to(to)
+    val output = input.map(f)
+    input.zip(output)
+  }
+
+  def old_values(f: (Int) => Int, from: Int, to: Int): Seq[(Int, Int)] = {
     if(from > to)
       throw new InvalidRangeException(from, to)
 
@@ -10,43 +16,30 @@ object Hof {
     input.zip(input.map(f))
   }
 
-  def largestValue(arr: Array[Int]): Int = arr.reduceLeft((acc: Int, x: Int) => Math.max(acc, x))
+  def largestValue(arr: Array[Int]): Int = arr.reduceLeft(Math.max)
 
-  def fact(n: Int): Int = {
-    if(n == 0) 
-      1
-    else
-      (1 to n).reduceLeft((acc: Int, x: Int) => acc * x)
+  def fact(n: Int) = {
+    if(n < 0) None
+    else if(n == 0) Some(1)
+    else Some((1 to n).reduceLeft(_ * _))
   }
 
   def factFold(n: Int): Int = {
-    (1 to n).foldLeft(1) { (acc, x) => acc * x }
+    (1 to n).foldLeft(1)( _ * _ )
   }
 
   def largest(f: (Int) => Int, inputs: Seq[Int]): Option[Int] = {
-    if(inputs.isEmpty)
-      None
-    else 
-      Some(inputs.map(f).reduceLeft(Math.max))
+    if(inputs.isEmpty) None
+    else
+      Some(largestValue(inputs.toArray.map(f)))
   }
 
-  def largestAt(f: (Int) => Int, inputs: Seq[Int]): Option[Int] = {
-    if(inputs.isEmpty)
-      None
-    else {
-      var index = -1
-      val max: (Int, Int) = inputs
-        .map(f)
-        .foldLeft((index, Int.MinValue)) { (acc: (Int, Int), x: Int) => 
-          index += 1
-          if(x > acc._2)
-            (index, x)
-          else
-            acc
-        }
+  def largestAt(f: (Int) => Int, inputs: Seq[Int]) = {
+    def maxTuple = (acc: (Int, Int), x: (Int, Int)) => if(x._1 > acc._1) x else acc
 
-      Some(max._1)
-    }
+    val outputs = inputs.map(f)
+    val greatestTuple = outputs.zipWithIndex.reduceLeft(maxTuple)
+    inputs(greatestTuple._2)
   }
 
   class InvalidRangeException(from: Int, to: Int) 
