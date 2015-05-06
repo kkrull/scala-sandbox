@@ -13,18 +13,15 @@ class MutableCollectionSpec extends FunSpec with Matchers {
   }
 }
 
-trait GreeterBehaviors { this: FunSpec =>
-  def aGreeter(fn: (String) => String) {
+class ImmutableCollectionSpec extends FunSpec with GreeterBehaviors with Matchers {
+  it should behave like aGreeter(() => "Hello, world")
+}
+
+trait GreeterBehaviors { this: FunSpec with Matchers =>
+  def aGreeter(fn: () => String) {
     it("exists") {
-      fn("bob") should equal("Hello, bob")
+      fn() should equal("Hello, world")
     }
   }
 }
 
-class ImmutableCollectionSpec extends FunSpec with Matchers {
-  describe("indexes") {
-    it("exists") {
-      ImmutableCollection.indexes
-    }
-  }
-}
