@@ -18,15 +18,11 @@ object MutableCollection {
 }
 
 object ImmutableCollection {
-  import scala.collection.immutable._
-
   def indexes(input: String): Map[Char, Set[Int]] = {
-  //  val characterIndexes = input.zipWithIndex
-  //  val init: Map[Char, Set[Int]] = Map()
-  //  characterIndexes.foldLeft(init)((acc: Map[Char, Set[Int]], x: (Char, Int)) => {
-  //    val indexSet = acc.getOrElse(x._1, Set[Int]())
-  //    acc ++ Map(x._1 -> (indexSet ++ Set(x._2)))
-  //  })
-    Map[Char, Set[Int]]()
+    input.zipWithIndex.foldLeft(Map[Char, Set[Int]]()) ((acc: Map[Char, Set[Int]], x: (Char, Int)) => {
+      val char = x._1
+      val indices = acc.getOrElse(char, Set[Int]()) + x._2
+      acc ++ Map(char -> indices)
+    })
   }
 }
