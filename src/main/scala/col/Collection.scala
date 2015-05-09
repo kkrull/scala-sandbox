@@ -25,4 +25,6 @@ object ImmutableCollection {
       acc ++ Map(char -> indices)
     })
   }
+
+  def removeZeros(input: List[Int]) = input.foldRight(List[Int]())((x, acc) => if(x == 0) acc else x :: acc)
 }
