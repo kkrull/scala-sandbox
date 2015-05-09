@@ -30,12 +30,30 @@ class ImmutableCollectionSpec extends FunSpec with IndexerBehaviors with Matcher
       }
     }
   }
+
+  describe(".indexWords") {
+    describe("given no words") {
+      it("returns an empty Array") {
+        ImmutableCollection.indexWords(Array(), Map("one" -> 1)) should equal(Array())
+      }
+    }
+
+    describe("given an index that does not match any of the given words") {
+      it("returns an empty Array") {
+        ImmutableCollection.indexWords(Array("known"), Map("unknown" -> 1)) should equal(Array())
+      }
+    }
+
+    describe("given an index with mappings for 1 or more words in the given input") {
+      it("returns an Array of mapped values for known words") {
+        ImmutableCollection.indexWords(Array("known"), Map("known" -> 1)) should equal(Array(1))
+      }
+    }
+  }
 }
 
 trait IndexerBehaviors extends FunSpec with Matchers { 
   def anIndexer(doIndex: (String) => collection.Map[Char, collection.Set[Int]]) = {
-    it("can be invoked") { doIndex("wark!") }
-
     describe("given an empty string") {
       it("returns an empty map") {
         doIndex("") should equal(Map())
