@@ -46,7 +46,9 @@ class ImmutableCollectionSpec extends FunSpec with IndexerBehaviors with Matcher
 
     describe("given an index with mappings for 1 or more words in the given input") {
       it("returns an Array of mapped values for known words") {
-        ImmutableCollection.indexWords(Array("known"), Map("known" -> 1)) should equal(Array(1))
+        val words = Array("known", "unknown", "alsoKnown")
+        val index = Map("known" -> 5, "alsoKnown" -> 42)
+        ImmutableCollection.indexWords(words, index) should equal(Array(5, 42))
       }
     }
   }

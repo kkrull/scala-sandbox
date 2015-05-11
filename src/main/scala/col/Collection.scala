@@ -29,6 +29,13 @@ object ImmutableCollection {
   def removeZeros(input: List[Int]) = input.foldRight(List[Int]())((x, acc) => if(x == 0) acc else x :: acc)
 
   def indexWords(words: Array[String], index: Map[String, Int]): Array[Int] = {
+    words.foldLeft(Array[Int]())((acc, word) => {
+      val indexed = index.get(word)
+      if(indexed.isDefined) acc ++ Array(indexed.get) else acc
+    })
+  }
+  
+  def indexWordsRecursive(words: Array[String], index: Map[String, Int]): Array[Int] = {
     def buildIndex(remaining: Array[String], output: Array[Int]): Array[Int] = {
       val indexed = if(remaining.isEmpty) None else index.get(remaining(0))
       if(remaining.isEmpty)
