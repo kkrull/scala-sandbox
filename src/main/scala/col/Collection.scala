@@ -19,9 +19,13 @@ object ImmutableCollection {
     })
   }
 
-  def removeZeros(input: List[Int]) = input.foldRight(List[Int]())((x, acc) => if(x == 0) acc else x :: acc)
+  def removeZeros(input: List[Int]) = input.filter(_ != 0)
 
   def indexWords(words: Array[String], index: Map[String, Int]): Array[Int] = {
+    words.map(index.get(_)).flatMap(x => x)
+  }
+
+  def indexWordsFold(words: Array[String], index: Map[String, Int]): Array[Int] = {
     words.foldLeft(Array[Int]())((acc, word) => {
       val indexed = index.get(word)
       if(indexed.isDefined) acc ++ Array(indexed.get) else acc
