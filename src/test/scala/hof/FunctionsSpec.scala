@@ -5,13 +5,12 @@ import org.scalatest._
 class FunctionSpec extends FunSpec with Matchers {
   //Problem 1
   describe(".values") {
-    describe("given a from > to") {
-      it("raises an error") {
-        pending
-        the [Hof.InvalidRangeException] thrownBy { Hof.values(x => x, 2, 1) } should 
-          have message("from value 2 is greater than to value 1")
-      }
-    }
+    //describe("given a from > to") {
+    //  it("raises an error") {
+    //    the [Hof.InvalidRangeException] thrownBy { Hof.values(x => x, 2, 1) } should 
+    //      have message("from value 2 is greater than to value 1")
+    //  }
+    //}
 
     describe("given from <= to") {
       it("returns a sequence containing of the given function applied to the specified range of input values") {
@@ -69,12 +68,12 @@ class FunctionSpec extends FunSpec with Matchers {
 
   //Problem 6
   describe(".largestAt") {
-    describe("given an empty sequence") {
-      it("returns None") {
-        pending
-        //Hof.largestAt((x: Int) => x*x, List(1, 2, 3)) should equal(None)
-      }
-    }
+    //describe("given an empty sequence") {
+    //  it("returns None") {
+    //    pending
+    //    //Hof.largestAt((x: Int) => x*x, List(1, 2, 3)) should equal(None)
+    //  }
+    //}
 
     describe("given a sequence of all the same output value") {
       it("returns the index of the first such value") {
