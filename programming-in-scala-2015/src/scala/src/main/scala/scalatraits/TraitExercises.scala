@@ -18,8 +18,8 @@ trait RectangleLike { this: Ellipse2D.Double =>
   }
 }
 
-trait BufferedInput extends InputStream { 
-  private var buffer = Array[Int](-1, -1) 
+trait BufferedInput extends InputStream {
+  private var buffer = Array[Int](-1, -1)
   private var bufferIndex = buffer.length
 
   def bufferedRead: Int = {
@@ -46,7 +46,7 @@ class OrderedPoint(x: Int, y: Int) extends Point(x, y) with Ordered[Point] {
       xComparison
     else
       compareDouble(getY, that.getY)
-  } 
+  }
 }
 
 //object Go extends App {

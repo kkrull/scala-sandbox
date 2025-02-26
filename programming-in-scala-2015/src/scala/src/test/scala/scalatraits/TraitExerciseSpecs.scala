@@ -64,7 +64,7 @@ class BufferedInputSpec extends FunSpec with Matchers {
       }
 
       it("calls InputStream.read enough times to fill the buffer") {
-        val subject = new InputStreamSpy with BufferedInput       
+        val subject = new InputStreamSpy with BufferedInput
         subject.bufferedRead //TODO KDK: Override InputStream.read
         subject.numReads should equal(2)
       }
@@ -81,7 +81,7 @@ class BufferedInputSpec extends FunSpec with Matchers {
     describe("when the stream is exhausted") {
       it("returns -1") {
         val subject = new ByteArrayInputStream(Array[Byte]()) with BufferedInput
-        subject.read should equal(-1) 
+        subject.read should equal(-1)
       }
     }
   }

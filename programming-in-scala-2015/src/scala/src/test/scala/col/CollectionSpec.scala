@@ -54,7 +54,7 @@ class ImmutableCollectionSpec extends FunSpec with IndexerBehaviors with Matcher
   }
 }
 
-trait IndexerBehaviors extends FunSpec with Matchers { 
+trait IndexerBehaviors extends FunSpec with Matchers {
   def anIndexer(doIndex: (String) => collection.Map[Char, collection.Set[Int]]) = {
     describe("given an empty string") {
       it("returns an empty map") {
@@ -65,8 +65,8 @@ trait IndexerBehaviors extends FunSpec with Matchers {
     describe("given a string") {
       it("returns a mapping of characters in the string to the indices at which they appear") {
         doIndex("abca") should equal(Map(
-          'a' -> Set(0, 3), 
-          'b' -> Set(1), 
+          'a' -> Set(0, 3),
+          'b' -> Set(1),
           'c' -> Set(2)
         ))
       }

@@ -7,7 +7,7 @@ class FunctionSpec extends FunSpec with Matchers {
   describe(".values") {
     //describe("given a from > to") {
     //  it("raises an error") {
-    //    the [Hof.InvalidRangeException] thrownBy { Hof.values(x => x, 2, 1) } should 
+    //    the [Hof.InvalidRangeException] thrownBy { Hof.values(x => x, 2, 1) } should
     //      have message("from value 2 is greater than to value 1")
     //  }
     //}
@@ -35,8 +35,8 @@ class FunctionSpec extends FunSpec with Matchers {
       it("returns 1") { Hof.fact(0) should equal(Some(1)) }
     }
 
-    describe("given n > 0") { 
-      it("returns the result of multiplying the sequence of values 1..n") { Hof.fact(3) should equal(Some(6)) } 
+    describe("given n > 0") {
+      it("returns the result of multiplying the sequence of values 1..n") { Hof.fact(3) should equal(Some(6)) }
     }
   }
 
@@ -46,8 +46,8 @@ class FunctionSpec extends FunSpec with Matchers {
       it("returns 1") { Hof.factFold(0) should equal(1) }
     }
 
-    describe("given n > 0") { 
-      it("returns the result of multiplying the sequence of values 1..n") { Hof.factFold(3) should equal(6) } 
+    describe("given n > 0") {
+      it("returns the result of multiplying the sequence of values 1..n") { Hof.factFold(3) should equal(6) }
     }
   }
 

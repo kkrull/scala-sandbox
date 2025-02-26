@@ -42,7 +42,7 @@ object Hof {
     inputs(greatestTuple._2)
   }
 
-  class InvalidRangeException(from: Int, to: Int) 
-    extends RuntimeException("from value %d is greater than to value %d".format(from, to)) 
+  class InvalidRangeException(from: Int, to: Int)
+    extends RuntimeException("from value %d is greater than to value %d".format(from, to))
     { /* empty */ }
 }
