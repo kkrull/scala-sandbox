@@ -9,10 +9,11 @@ A monorepo of independent projects that try different ideas out in Scala.
 
 ## Setup
 
-- Install
-  - [programs and development tools](./tools.md)
-  - (optional) development tools (e.g. `pre-commit`): `make install-tools`
-- Build: `make`
+- Install repository-wide tools:
+  - [GNU Make](./doc/tools.md#gnu-make)
+  - [`pre-commit`](./doc/tools.md#pre-commit)
+- Install tools listed in each project's documentation.
+- Go for broke: `make` and `make test`.
 
 ## Task Automation
 
@@ -26,5 +27,6 @@ Tasks are automated in a couple of ways, in this repository:
 
 ## Tools
 
-See each project's documentation for a list of tools that it uses.  See [tools](./doc/tools.md) for
-a comprehensive list of all tools, over all projects.
+See [tools](./doc/tools.md) for a comprehensive list of tools used throughout this repository and
+some pointers on how to get them working.  Each project lists which tools among them are relevant to
+its own sources.
