@@ -43,10 +43,12 @@ pre-commit-update: #> Update pre-commit plugins
 .PHONY: all
 all: #> Build all sub-projects
 	$(MAKE) -C programming-in-scala-2015 all
+	$(MAKE) -C sbt-in-action all
 
 .PHONY: clean
 clean: pre-commit-gc #> Remove local build files
 	$(MAKE) -C programming-in-scala-2015 clean
+	$(MAKE) -C sbt-in-action clean
 
 .PHONY: install
 install:
@@ -55,6 +57,7 @@ install:
 .PHONY: test
 test: pre-commit-run #> Run checks
 	$(MAKE) -C programming-in-scala-2015 test
+	$(MAKE) -C sbt-in-action test
 
 .PHONY: uninstall
 uninstall:
@@ -79,9 +82,12 @@ help: #> Show this help
 .PHONY: help-all
 help-all: help #> Show help for all Makefiles
 	$(MAKE) -C programming-in-scala-2015 help
+	$(MAKE) -C sbt-in-action help
 
 install-assets:
 	$(MAKE) -C programming-in-scala-2015 install-assets
+	$(MAKE) -C sbt-in-action install-assets
 
 install-tools: pre-commit-install #> Install development tools
 	$(MAKE) -C programming-in-scala-2015 install-tools
+	$(MAKE) -C sbt-in-action install-tools
