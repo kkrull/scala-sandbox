@@ -6,7 +6,7 @@ object MutableCollection {
   def indexes(input: String): Map[Char, Set[Int]] = {
     val mapping: Map[Char, Set[Int]] = Map()
     input.zipWithIndex.foreach(x => mapping.getOrElseUpdate(x._1, Set[Int]()) += x._2)
-    mapping 
+    mapping
   }
 }
 
@@ -31,7 +31,7 @@ object ImmutableCollection {
       if(indexed.isDefined) acc ++ Array(indexed.get) else acc
     })
   }
-  
+
   def indexWordsRecursive(words: Array[String], index: Map[String, Int]): Array[Int] = {
     def buildIndex(remaining: Array[String], output: Array[Int]): Array[Int] = {
       val indexed = if(remaining.isEmpty) None else index.get(remaining(0))

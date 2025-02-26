@@ -16,13 +16,12 @@ debug-sources:
 
 ## Artifacts
 
-# TODO KDK: Figure out where the compiled files go with sbt, these days.  Then update.
-objects := $(patsubst src/main/scala/%.scala,target/%.class,$(sources))
+#objects := $(patsubst src/main/scala/%.scala,target/scala-2.11/classes/%.class,$(sources))
 
 .PHONY: debug-artifacts
 debug-artifacts:
 	$(info Artifacts:)
-	$(info - objects: $(objects))
+#	$(info - objects: $(objects))
 	@:
 
 ## Paths
@@ -48,19 +47,20 @@ debug-programs:
 edit:
 	$(EDITOR) $(sources) &
 
-target/scala/%.class: src/main/scala/%.scala #> Compile sources
-	$(SBT) compile
+# TODO KDK: Paths are kind of janky, since I didn't bother to structure by package (e.g. com/github/...)
+#target/scala-2.11/classes/%.class: src/main/scala/%.scala #> Compile sources
+#	$(SBT) compile
 
 #. STANDARD TARGETS
 
 .NOTPARALLEL: all
 .PHONY: all
-all: $(objects) #> Build all artifacts
-	@:
+all: #> Build all artifacts with sbt (change detection delegated to sbt)
+	$(SBT) compile
 
 .PHONY: clean
 clean: #> Remove files built from these sources
-	$(RM) $(objects)
+	$(SBT) clean
 
 .PHONY: install
 install:

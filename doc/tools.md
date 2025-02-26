@@ -1,6 +1,6 @@
 # Tools
 
-Tools used for this project, in hopes of making life easier on developers.
+Tools used in at least one project in this repository, in hopes of making life easier on developers.
 
 Look here for references to foundational documentation and key configuration files.
 

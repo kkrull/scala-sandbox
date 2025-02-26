@@ -41,20 +41,20 @@ pre-commit-update: #> Update pre-commit plugins
 #. STANDARD TARGETS
 
 .PHONY: all
-all: #> Build all artifacts
-	$(MAKE) -C src/scala all
+all: #> Build all sub-projects
+	$(MAKE) -C programming-in-scala-2015 all
 
 .PHONY: clean
 clean: pre-commit-gc #> Remove local build files
-	$(MAKE) -C src/scala clean
+	$(MAKE) -C programming-in-scala-2015 clean
 
 .PHONY: install
 install:
-	$(MAKE) -C src/scala install
+	@:
 
 .PHONY: test
 test: pre-commit-run #> Run checks
-	@:
+	$(MAKE) -C programming-in-scala-2015 test
 
 .PHONY: uninstall
 uninstall:
@@ -65,7 +65,7 @@ uninstall:
 .PHONY: debug
 .NOTPARALLEL: debug
 debug: | debug-project #> Show debugging information
-	$(MAKE) -C src/scala debug
+	@:
 
 # https://stackoverflow.com/a/47107132/112682
 .PHONY: help
@@ -78,12 +78,10 @@ help: #> Show this help
 
 .PHONY: help-all
 help-all: help #> Show help for all Makefiles
-	$(MAKE) -C src/scala help
+	$(MAKE) -C programming-in-scala-2015 help
 
 install-assets:
-	$(MAKE) -C src/scala install-assets
-	@:
+	$(MAKE) -C programming-in-scala-2015 install-assets
 
 install-tools: pre-commit-install #> Install development tools
-	$(MAKE) -C src/scala install-tools
-	@:
+	$(MAKE) -C programming-in-scala-2015 install-tools
