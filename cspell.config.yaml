@@ -1,0 +1,31 @@
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+dictionaries: []
+dictionaryDefinitions: []
+enableFiletypes:
+  - makefile
+  - markdown
+  - plaintext
+  - text
+  - yaml
+ignorePaths:
+  - .gitignore
+  - cspell.config.yaml
+ignoreWords: []
+import: []
+version: "0.2"
+words:
+  - ATDD
+  - autoupdate
+  - checkmake
+  - datadirpkg
+  - direnv
+  - envrc
+  - filemode
+  - fswatch
+  - kkrull
+  - Krull
+  - Makefiles
+  - NOTPARALLEL
+  - Pandoc
+  - scalatest
+  - SDKMAN
