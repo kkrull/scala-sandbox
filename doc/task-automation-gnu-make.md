@@ -14,6 +14,22 @@ No top-level artifacts are built, in this repository, but each project might bui
 Makefiles include targets to ease the process of running various checks on project sources with
 [`pre-commit`](./tools.md#pre-commit).
 
+### `make pre-commit-gc`
+
+Remove stale pre-commit files.
+
+### `make pre-commit-install`
+
+Install pre-commit hook(s) in your local Git repository, so it automatically checks things for you.
+
+### `make pre-commit-run`
+
+Run pre-commit on all sources.
+
+### `make pre-commit-update`
+
+Update pre-commit plugins.
+
 ## Support targets
 
 ### `make debug`
