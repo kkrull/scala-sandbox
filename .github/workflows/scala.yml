@@ -7,6 +7,10 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 
+env:
+  java_distribution: 'temurin'
+  java_version: '21'
+
 permissions:
   contents: read
 
@@ -22,8 +26,8 @@ jobs:
     - uses: actions/setup-java@v4
       with:
         cache: 'sbt'
-        distribution: &java-distribution 'temurin'
-        java-version: &java-version '21'
+        distribution: ${{ env.java_distribution }}
+        java-version: ${{ env.java_version }}
     - uses: sbt/setup-sbt@v1
     - run: java --version
     - run: sbt --version
@@ -40,8 +44,8 @@ jobs:
     - uses: actions/setup-java@v4
       with:
         cache: 'sbt'
-        distribution: *java-distribution
-        java-version: *java-version
+        distribution: ${{ env.java_distribution }}
+        java-version: ${{ env.java_version }}
     - uses: sbt/setup-sbt@v1
     - run: sbt compile
 
@@ -57,7 +61,7 @@ jobs:
     - uses: actions/setup-java@v4
       with:
         cache: 'sbt'
-        distribution: *java-distribution
-        java-version: *java-version
+        distribution: ${{ env.java_distribution }}
+        java-version: ${{ env.java_version }}
     - uses: sbt/setup-sbt@v1
     - run: sbt test
