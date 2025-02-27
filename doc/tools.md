@@ -66,6 +66,16 @@ _Automates project-related tasks, such as rendering project audio._
 - Files:
   - `Makefile`
 
+## [Java Environment Manager](https://github.com/jenv/jenv) (jEnv)
+
+_Manage your Java environment with `jenv`._
+
+- Documentation: <https://github.com/jenv/jenv>
+- Files:
+  - `.java-version`: The version of the JDK intended for use when working on this project.
+- Installation:
+  - Homebrew: `brew install jenv`
+
 ## [Markdown](https://daringfireball.net/projects/markdown/)
 
 _File format and syntax for documentation._
@@ -123,6 +133,9 @@ _Build tool and task automation for Scala projects._
 
 - Documentation:
   - Main: <https://www.scala-sbt.org/>
+  - sbt by example: <https://www.scala-sbt.org/1.x/docs/sbt-by-example.html>
+  - sbt is recursive (or what is in `project/` and should I ignore it?):
+    <https://www.scala-sbt.org/1.x/docs/Organizing-Build.html#sbt+is+recursive>
 - Files:
   - `build.sbt`
 - Installation:

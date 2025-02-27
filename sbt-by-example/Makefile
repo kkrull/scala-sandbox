@@ -1,4 +1,4 @@
-#. ==sbt in action==
+#. ==sbt by example==
 
 .PHONY: default
 default: all

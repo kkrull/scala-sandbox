@@ -22,11 +22,14 @@ words:
   - envrc
   - filemode
   - fswatch
+  - jenv
   - kkrull
   - Krull
   - Makefiles
+  - munit
   - NOTPARALLEL
   - Pandoc
   - scalatest
   - SDKMAN
   - temurin
+  - ujson
