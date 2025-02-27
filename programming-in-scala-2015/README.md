@@ -6,8 +6,10 @@ Programming in Scala.
 ## Contents
 
 - [`doc/`](./doc/README.md): Documentation, including project setup.
-- [`src/scala/`](./src/scala/README.md): Scala sources, lovingly organized by the Department of
-  Redundancy Department.
+- `core/`: Core library.
+- `project/`: Code for the meta build.
+- `src/main/scala/`: Production code for the main package.
+- `src/main/test/`: Test code for the main package.
 
 ## Setup
 
@@ -20,8 +22,7 @@ This project uses:
 
 - [GNU Make](../doc/tools.md#gnu-make) with conventional targets for building and managing
   artifacts.  See `Makefile` or run `make help` for details.
-- [`sbt`](../doc/tools.md#simple-build-tool-sbt) as its build tool.  See `src/scala/build.sbt` for
-  details.
+- [`sbt`](../doc/tools.md#simple-build-tool-sbt) as its build tool.  See `build.sbt` for details.
 
 ## Tools
 
