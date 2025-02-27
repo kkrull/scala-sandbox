@@ -123,6 +123,8 @@ _Build tool and task automation for Scala projects._
 
 - Documentation:
   - Main: <https://www.scala-sbt.org/>
+  - sbt is recursive (or what is in `project/` and should I ignore it?):
+    <https://www.scala-sbt.org/1.x/docs/Organizing-Build.html#sbt+is+recursive>
 - Files:
   - `build.sbt`
 - Installation:
