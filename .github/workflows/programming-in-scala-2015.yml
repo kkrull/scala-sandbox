@@ -1,12 +1,16 @@
-name: Scala CI for monorepo
+name: Programming in Scala 2015
 
 on:
   pull_request:
     branches: [ 'main' ]
-    paths: ['.github/workflows/**', 'programming-in-scala-2015/**']
+    paths:
+      - '.github/workflows/programming-in-scala-2015.yml'
+      - 'programming-in-scala-2015/**'
   push:
     branches: [ 'main' ]
-    paths: ['.github/workflows/**', 'programming-in-scala-2015/**']
+    paths:
+      - '.github/workflows/programming-in-scala-2015.yml'
+      - 'programming-in-scala-2015/**'
   workflow_dispatch:
 
 env:
