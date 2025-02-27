@@ -27,5 +27,6 @@ This project uses:
 Some tools need to be installed ahead of time:
 
 - [GNU Make](../doc/tools.md#gnu-make)
+- [jEnv](../doc/tools.md#java-environment-manager-jenv)
 - [SDKMAN!](../doc/tools.md#sdkman)
 - [`sbt`](../doc/tools.md#simple-build-tool-sbt)

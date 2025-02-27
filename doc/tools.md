@@ -66,6 +66,16 @@ _Automates project-related tasks, such as rendering project audio._
 - Files:
   - `Makefile`
 
+## [Java Environment Manager](https://github.com/jenv/jenv) (jEnv)
+
+_Manage your Java environment with `jenv`._
+
+- Documentation: <https://github.com/jenv/jenv>
+- Files:
+  - `.java-version`: The version of the JDK intended for use when working on this project.
+- Installation:
+  - Homebrew: `brew install jenv`
+
 ## [Markdown](https://daringfireball.net/projects/markdown/)
 
 _File format and syntax for documentation._
