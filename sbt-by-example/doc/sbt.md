@@ -10,6 +10,10 @@ Compile code, optionally triggering when sources change.
 
 Start a REPL.
 
+## `sbt dist`
+
+Create a distribution.
+
 ## `sbt run`
 
 Run the main program, compiling if necessary.

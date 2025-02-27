@@ -7,9 +7,11 @@ lazy val hello = project
   .in(file("."))
   .aggregate(helloCore)
   .dependsOn(helloCore)
+  .enablePlugins(JavaAppPackaging)
   .settings(
     name := "Hello",
-    libraryDependencies += toolkitTest % Test
+    libraryDependencies += toolkitTest % Test,
+    maintainer := "Kyle Krull"
   )
 
 lazy val helloCore = project
