@@ -1,4 +1,4 @@
-# GNU Make Tasks
+# Task Automation with GNU Make
 
 This repository uses [GNU Make](./tools.md#gnu-make) to automate repository-wide tasks.  They are
 structured according to some [local conventions](./decisions.md#makefile-conventions).
