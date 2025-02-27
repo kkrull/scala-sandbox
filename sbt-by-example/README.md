@@ -1,6 +1,6 @@
-# `sbt` in Action
+# sbt by example
 
-Trying out some parts of "`sbt` in Action".
+Going through the tutorial at <https://www.scala-sbt.org/1.x/docs/sbt-by-example.html>.
 
 ## Contents
 
@@ -11,14 +11,14 @@ Trying out some parts of "`sbt` in Action".
 ## Setup
 
 - Install [tools](#tools)
-- [Use `make` and/or `sbt`](#task-automation) to build and test sources.
+- ~~[Use `make` and/or `sbt`](#task-automation) to build and test sources.~~
 
 ## Task Automation
 
 This project uses:
 
-- [GNU Make](../doc/tools.md#gnu-make) with conventional targets for building and managing
-  artifacts.  See `Makefile` or run `make help` for details.
+- ~~[GNU Make](../doc/tools.md#gnu-make) with conventional targets for building and managing
+  artifacts.  See `Makefile` or run `make help` for details.~~
 - [`sbt`](../doc/tools.md#simple-build-tool-sbt) as its build tool.  See `src/scala/build.sbt` for
   details.
 

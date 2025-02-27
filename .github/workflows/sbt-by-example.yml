@@ -1,28 +1,28 @@
-name: sbt in Action
+name: sbt by example
 
 on:
   pull_request:
     branches: [ 'main' ]
     paths:
-      - '.github/workflows/sbt-in-action.yml'
-      - 'sbt-in-action/**'
+      - '.github/workflows/sbt-by-example.yml'
+      - 'sbt-by-example/**'
   push:
     branches: [ 'main' ]
     paths:
-      - '.github/workflows/sbt-in-action.yml'
-      - 'sbt-in-action/**'
+      - '.github/workflows/sbt-by-example.yml'
+      - 'sbt-by-example/**'
   workflow_dispatch:
 
 env:
   java_distribution: temurin
   java_version: '21'
-  working_directory: ./sbt-in-action/src/scala
+  working_directory: ./sbt-by-example/src/scala
 
 permissions:
   contents: read
 
 jobs:
-  sbt-in-action:
+  sbt-by-example:
     defaults:
       run:
         working-directory: ${{ env.working_directory }}
@@ -39,11 +39,11 @@ jobs:
     - run: java --version
     - run: sbt --version
 
-  sbt-in-action-compile:
+  sbt-by-example-compile:
     defaults:
       run:
         working-directory: ${{ env.working_directory }}
-    needs: sbt-in-action
+    needs: sbt-by-example
     runs-on: ubuntu-24.04
 
     steps:
@@ -56,11 +56,11 @@ jobs:
     - uses: sbt/setup-sbt@v1
     - run: sbt compile
 
-  sbt-in-action-test:
+  sbt-by-example-test:
     defaults:
       run:
         working-directory: ${{ env.working_directory }}
-    needs: sbt-in-action-compile
+    needs: sbt-by-example-compile
     runs-on: ubuntu-24.04
 
     steps:
