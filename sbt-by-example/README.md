@@ -19,8 +19,8 @@ Going through the tutorial at <https://www.scala-sbt.org/1.x/docs/sbt-by-example
 
 This project uses:
 
-- ~~[GNU Make](../doc/tools.md#gnu-make) with conventional targets for building and managing
-  artifacts.  See `Makefile` or run `make help` for details.~~
+- [GNU Make](../doc/tools.md#gnu-make) with conventional targets for building and managing
+  artifacts.  See `Makefile` or run `make help` for details.
 - [`sbt`](../doc/tools.md#simple-build-tool-sbt) as its build tool.  See `build.sbt` for details.
 
 ## Tools
