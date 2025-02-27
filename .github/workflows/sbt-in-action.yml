@@ -16,8 +16,7 @@ on:
 env:
   java_distribution: temurin
   java_version: '21'
-  project_name: ./sbt-in-action
-  working_directory: "${project_name}/src/scala"
+  working_directory: ./sbt-in-action/src/scala
 
 permissions:
   contents: read

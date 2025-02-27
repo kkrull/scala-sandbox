@@ -16,8 +16,7 @@ on:
 env:
   java_distribution: temurin
   java_version: '21'
-  project_name: ./programming-in-scala-2015
-  working_directory: "${project_name}/src/scala"
+  working_directory: ./programming-in-scala-2015/src/scala
 
 permissions:
   contents: read
