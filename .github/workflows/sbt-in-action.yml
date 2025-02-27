@@ -1,0 +1,75 @@
+name: sbt in Action
+
+on:
+  pull_request:
+    branches: [ 'main' ]
+    paths:
+      - '.github/workflows/sbt-in-action.yml'
+      - 'sbt-in-action/**'
+  push:
+    branches: [ 'main' ]
+    paths:
+      - '.github/workflows/sbt-in-action.yml'
+      - 'sbt-in-action/**'
+  workflow_dispatch:
+
+env:
+  java_distribution: temurin
+  java_version: '21'
+  project_name: ./sbt-in-action
+  working_directory: "${project_name}/src/scala"
+
+permissions:
+  contents: read
+
+jobs:
+  sbt-in-action:
+    defaults:
+      run:
+        working-directory: ${{ env.working_directory }}
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with:
+        cache: 'sbt'
+        distribution: ${{ env.java_distribution }}
+        java-version: ${{ env.java_version }}
+    - uses: sbt/setup-sbt@v1
+    - run: java --version
+    - run: sbt --version
+
+  # sbt-in-action-compile:
+  #   defaults:
+  #     run:
+  #       working-directory: ${{ env.working_directory }}
+  #   needs: sbt-in-action
+  #   runs-on: ubuntu-24.04
+
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #   - uses: actions/setup-java@v4
+  #     with:
+  #       cache: 'sbt'
+  #       distribution: ${{ env.java_distribution }}
+  #       java-version: ${{ env.java_version }}
+  #   - uses: sbt/setup-sbt@v1
+  #   - run: sbt compile
+
+  # sbt-in-action-test:
+  #   defaults:
+  #     run:
+  #       working-directory: ${{ env.working_directory }}
+  #   needs: sbt-in-action-compile
+  #   runs-on: ubuntu-24.04
+
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #   - uses: actions/setup-java@v4
+  #     with:
+  #       cache: 'sbt'
+  #       distribution: ${{ env.java_distribution }}
+  #       java-version: ${{ env.java_version }}
+  #   - uses: sbt/setup-sbt@v1
+  #   - run: sbt test
