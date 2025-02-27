@@ -49,7 +49,7 @@ _Defines basic parameters for formatting source files._
 _Performs Continuous Integration / Continuous Deployment (CI/CD)._
 
 - Files:
-  - `.github/workflows`: Workflow definitions
+  - `.github/workflows/`: Workflow definitions
 
 ## [GNU Make](https://www.gnu.org/software/make/)
 
