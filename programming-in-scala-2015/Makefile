@@ -1,4 +1,4 @@
-#. ==Scala==
+#. ==Programming in Scala 2015==
 
 .PHONY: default
 default: all
@@ -16,12 +16,12 @@ debug-sources:
 
 ## Artifacts
 
-#objects := $(patsubst src/main/scala/%.scala,target/scala-2.11/classes/%.class,$(sources))
+# Can't really track object files that well, since one scala file could output several class files
+# For example, one for the class and one for the object.
 
 .PHONY: debug-artifacts
 debug-artifacts:
 	$(info Artifacts:)
-#	$(info - objects: $(objects))
 	@:
 
 ## Paths
@@ -40,16 +40,6 @@ debug-programs:
 	$(info Programs:)
 	$(info - SBT: $(SBT))
 	@:
-
-#. SCALA TARGETS
-
-.PHONY: edit
-edit:
-	$(EDITOR) $(sources) &
-
-# TODO KDK: Paths are kind of janky, since I didn't bother to structure by package (e.g. com/github/...)
-#target/scala-2.11/classes/%.class: src/main/scala/%.scala #> Compile sources
-#	$(SBT) compile
 
 #. STANDARD TARGETS
 
