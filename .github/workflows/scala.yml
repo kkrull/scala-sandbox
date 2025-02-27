@@ -10,6 +10,8 @@ on:
 env:
   java_distribution: temurin
   java_version: '21'
+  project_name: ./programming-in-scala-2015
+  working_directory: "${project_name}/src/scala"
 
 permissions:
   contents: read
@@ -18,7 +20,7 @@ jobs:
   programming-in-scala:
     defaults:
       run:
-        working-directory: ./programming-in-scala-2015/src/scala
+        working-directory: ${{ env.working_directory }}
     runs-on: ubuntu-24.04
 
     steps:
@@ -35,7 +37,7 @@ jobs:
   programming-in-scala-compile:
     defaults:
       run:
-        working-directory: ./programming-in-scala-2015/src/scala
+        working-directory: ${{ env.working_directory }}
     needs: programming-in-scala
     runs-on: ubuntu-24.04
 
@@ -52,7 +54,7 @@ jobs:
   programming-in-scala-test:
     defaults:
       run:
-        working-directory: ./programming-in-scala-2015/src/scala
+        working-directory: ${{ env.working_directory }}
     needs: programming-in-scala-compile
     runs-on: ubuntu-24.04
 
