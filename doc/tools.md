@@ -44,10 +44,13 @@ _Defines basic parameters for formatting source files._
 - Related tools:
   - [`pre-commit`](#pre-commit): Runs checks for this tool.
 
-## GitHub Actions
+## [GitHub Actions](https://docs.github.com/en/actions)
 
 _Performs Continuous Integration / Continuous Deployment (CI/CD)._
 
+- Documentation:
+  - Workflow syntax:
+    <https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions>
 - Files:
   - `.github/workflows/`: Workflow definitions
 
