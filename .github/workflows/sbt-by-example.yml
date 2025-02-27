@@ -16,7 +16,7 @@ on:
 env:
   java_distribution: temurin
   java_version: '21'
-  working_directory: ./sbt-by-example/src/scala
+  working_directory: ./sbt-by-example
 
 permissions:
   contents: read
