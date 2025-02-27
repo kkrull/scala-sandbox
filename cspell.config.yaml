@@ -32,3 +32,4 @@ words:
   - scalatest
   - SDKMAN
   - temurin
+  - ujson
