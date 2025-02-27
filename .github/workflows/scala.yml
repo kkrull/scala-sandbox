@@ -24,6 +24,7 @@ jobs:
         cache: 'sbt'
         distribution: 'temurin'
         java-version: '21'
+    - uses: sbt/setup-sbt@v1
     - run: java --version
     - run: sbt --version
 
@@ -41,6 +42,7 @@ jobs:
         cache: 'sbt'
         distribution: 'temurin'
         java-version: '21'
+    - uses: sbt/setup-sbt@v1
     - run: sbt compile
 
   scala-test:
@@ -57,4 +59,5 @@ jobs:
         cache: 'sbt'
         distribution: 'temurin'
         java-version: '21'
+    - uses: sbt/setup-sbt@v1
     - run: sbt test
