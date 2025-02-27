@@ -15,15 +15,15 @@ jobs:
     defaults:
       run:
         working-directory: ./programming-in-scala-2015/src/scala
-    runs-on: ubuntu-24.04
+    runs-on: &runner-image ubuntu-24.04
 
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-java@v4
       with:
         cache: 'sbt'
-        distribution: 'temurin'
-        java-version: '21'
+        distribution: &java-distribution 'temurin'
+        java-version: &java-version '21'
     - uses: sbt/setup-sbt@v1
     - run: java --version
     - run: sbt --version
@@ -33,15 +33,15 @@ jobs:
       run:
         working-directory: ./programming-in-scala-2015/src/scala
     needs: programming-in-scala
-    runs-on: ubuntu-24.04
+    runs-on: *runner-image
 
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-java@v4
       with:
         cache: 'sbt'
-        distribution: 'temurin'
-        java-version: '21'
+        distribution: *java-distribution
+        java-version: *java-version
     - uses: sbt/setup-sbt@v1
     - run: sbt compile
 
@@ -50,14 +50,14 @@ jobs:
       run:
         working-directory: ./programming-in-scala-2015/src/scala
     needs: programming-in-scala-compile
-    runs-on: ubuntu-24.04
+    runs-on: *runner-image
 
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-java@v4
       with:
         cache: 'sbt'
-        distribution: 'temurin'
-        java-version: '21'
+        distribution: *java-distribution
+        java-version: *java-version
     - uses: sbt/setup-sbt@v1
     - run: sbt test
