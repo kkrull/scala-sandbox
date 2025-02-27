@@ -49,6 +49,7 @@ _Defines basic parameters for formatting source files._
 _Performs Continuous Integration / Continuous Deployment (CI/CD)._
 
 - Documentation:
+  - Runner image definitions: <https://github.com/actions/runner-images>
   - Workflow syntax:
     <https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions>
 - Files:
