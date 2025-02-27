@@ -10,6 +10,7 @@ See [GitHub Actions](./doc/github-actions.md).
 
 - [`programming-in-scala-2015`](./programming-in-scala-2015/README.md): Book club for Programming in
   Scala, circa 2015.
+- [`sbt-in-action`](./sbt-in-action/README.md): Going through the book.
 
 ## Setup
 
