@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  scala:
+  programming-in-scala:
     defaults:
       run:
         working-directory: ./programming-in-scala-2015/src/scala
@@ -28,11 +28,11 @@ jobs:
     - run: java --version
     - run: sbt --version
 
-  scala-compile:
+  programming-in-scala-compile:
     defaults:
       run:
         working-directory: ./programming-in-scala-2015/src/scala
-    needs: scala
+    needs: programming-in-scala
     runs-on: ubuntu-latest
 
     steps:
@@ -45,11 +45,11 @@ jobs:
     - uses: sbt/setup-sbt@v1
     - run: sbt compile
 
-  scala-test:
+  programming-in-scala-test:
     defaults:
       run:
         working-directory: ./programming-in-scala-2015/src/scala
-    needs: scala-compile
+    needs: programming-in-scala-compile
     runs-on: ubuntu-latest
 
     steps:
