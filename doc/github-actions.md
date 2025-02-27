@@ -2,6 +2,11 @@
 
 Continuous Integration (CI) runs on [GitHub Actions](../doc/tools.md#github-actions).
 
+## Conventions
+
+Workflows and jobs are structured according to [local
+conventions](../doc/decisions.md#github-actions-conventions).
+
 ## Jobs
 
 Jobs are defined in  `.github/workflows/` and run on [Ubuntu 24.04
