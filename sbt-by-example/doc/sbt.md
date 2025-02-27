@@ -12,7 +12,7 @@ Start a REPL.
 
 ## `sbt dist`
 
-Create a distribution.
+Create a distribution in `target/universal/`.
 
 ## `sbt run`
 
