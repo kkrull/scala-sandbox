@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  java_distribution: 'temurin'
+  java_distribution: temurin
   java_version: '21'
 
 permissions:
@@ -19,7 +19,7 @@ jobs:
     defaults:
       run:
         working-directory: ./programming-in-scala-2015/src/scala
-    runs-on: &runner-image ubuntu-24.04
+    runs-on: ubuntu-24.04
 
     steps:
     - uses: actions/checkout@v4
@@ -37,7 +37,7 @@ jobs:
       run:
         working-directory: ./programming-in-scala-2015/src/scala
     needs: programming-in-scala
-    runs-on: *runner-image
+    runs-on: ubuntu-24.04
 
     steps:
     - uses: actions/checkout@v4
@@ -54,7 +54,7 @@ jobs:
       run:
         working-directory: ./programming-in-scala-2015/src/scala
     needs: programming-in-scala-compile
-    runs-on: *runner-image
+    runs-on: ubuntu-24.04
 
     steps:
     - uses: actions/checkout@v4
