@@ -1,4 +1,5 @@
 import org.scalatest._
+import funsuite._
 
 class HelloSuite extends AnyFunSuite {
   def greeting(): String = {
