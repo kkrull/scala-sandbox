@@ -1,6 +1,6 @@
-# sbt by example
+# ScalaTest
 
-Going through the tutorial at <https://www.scala-sbt.org/1.x/docs/sbt-by-example.html>.
+Start using ScalaTest again, from Programming in Scala 4th Edition (2019).
 
 ## Contents
 

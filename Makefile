@@ -13,9 +13,20 @@ default: all
 
 ## Project
 
+# https://stackoverflow.com/a/17845120/112682
+SUBDIRS := \
+	programming-in-scala-2015 \
+	sbt-by-example \
+	scalatest-3
+
+.PHONY: $(SUBDIRS)
+$(SUBDIRS):
+	$(MAKE) -C $@ $(MAKECMDGOALS)
+
 .PHONY: debug-project
 debug-project:
 	$(info Project:)
+	$(info - SUBDIRS: $(SUBDIRS))
 	@:
 
 #. PRE-COMMIT TARGETS
@@ -41,53 +52,45 @@ pre-commit-update: #> Update pre-commit plugins
 #. STANDARD TARGETS
 
 .PHONY: all
-all: #> Build all sub-projects
-	$(MAKE) -C programming-in-scala-2015 all
-	$(MAKE) -C sbt-by-example all
+all: $(SUBDIRS) #> Build all projects
 
 .PHONY: clean
-clean: pre-commit-gc #> Remove local build files
-	$(MAKE) -C programming-in-scala-2015 clean
-	$(MAKE) -C sbt-by-example clean
+clean: pre-commit-gc $(SUBDIRS) #> Remove local build files
 
 .PHONY: install
-install:
-	@:
+install: $(SUBDIRS)
 
 .PHONY: test
-test: pre-commit-run #> Run checks
-	$(MAKE) -C programming-in-scala-2015 test
-	$(MAKE) -C sbt-by-example test
+test: pre-commit-run $(SUBDIRS) #> Run tests
 
 .PHONY: uninstall
-uninstall:
-	@:
+uninstall: $(SUBDIRS)
 
 #. SUPPORT TARGETS
 
 .PHONY: debug
 .NOTPARALLEL: debug
-debug: | debug-project #> Show debugging information
+debug: _debug-prefix debug-project $(SUBDIRS) #> Show debugging information
+
+.PHONY: _debug-prefix
+_debug-prefix:
+	$(info ==Scala Sandbox==)
 	@:
 
-# https://stackoverflow.com/a/47107132/112682
 .PHONY: help
-help: #> Show this help
+help: help-local $(SUBDIRS) #> Show this help
+
+# https://stackoverflow.com/a/47107132/112682
+.PHONY: help-local
+help-local:
 	@sed -n \
 		-e '/@sed/!s/#[.] */_margin_\n/p' \
 		-e '/@sed/!s/:.*#> /:/p' \
 		$(MAKEFILE_LIST) \
 	| column -ts : | sed -e 's/_margin_//'
 
-.PHONY: help-all
-help-all: help #> Show help for all Makefiles
-	$(MAKE) -C programming-in-scala-2015 help
-	$(MAKE) -C sbt-by-example help
+.PHONY: install-assets
+install-assets: $(SUBDIRS)
 
-install-assets:
-	$(MAKE) -C programming-in-scala-2015 install-assets
-	$(MAKE) -C sbt-by-example install-assets
-
-install-tools: pre-commit-install #> Install development tools
-	$(MAKE) -C programming-in-scala-2015 install-tools
-	$(MAKE) -C sbt-by-example install-tools
+.PHONY: install-tools
+install-tools: pre-commit-install $(SUBDIRS) #> Install development tools
