@@ -68,7 +68,12 @@ uninstall:
 
 .PHONY: debug
 .NOTPARALLEL: debug
-debug: debug-artifacts debug-paths debug-programs debug-sources #> Show debugging information
+debug: _debug-prefix debug-artifacts debug-paths debug-programs debug-sources #> Show debugging information
+	@:
+
+.PHONY: _debug-prefix
+_debug-prefix:
+	$(info ==Scala Test==)
 	@:
 
 # https://stackoverflow.com/a/47107132/112682

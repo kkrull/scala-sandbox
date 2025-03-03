@@ -69,14 +69,19 @@ uninstall: $(SUBDIRS)
 
 .PHONY: debug
 .NOTPARALLEL: debug
-debug: debug-project $(SUBDIRS) #> Show debugging information
+debug: _debug-prefix debug-project $(SUBDIRS) #> Show debugging information
+
+.PHONY: _debug-prefix
+_debug-prefix:
+	$(info ==Scala Sandbox==)
+	@:
 
 .PHONY: help
-help: help-project $(SUBDIRS) #> Show this help
+help: help-local $(SUBDIRS) #> Show this help
 
 # https://stackoverflow.com/a/47107132/112682
-.PHONY: help-project
-help-project:
+.PHONY: help-local
+help-local:
 	@sed -n \
 		-e '/@sed/!s/#[.] */_margin_\n/p' \
 		-e '/@sed/!s/:.*#> /:/p' \
