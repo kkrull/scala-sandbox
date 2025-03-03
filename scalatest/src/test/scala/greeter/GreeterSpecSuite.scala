@@ -1,21 +1,20 @@
 import org.scalatest._
+import org.scalatest.matchers.should._
 import funspec._
 
 import greeter.Greeter
 
-class GreeterSpec extends AnyFunSpec {
+class GreeterSpec extends AnyFunSpec with Matchers {
   describe("Greeter") {
     val subject = new Greeter()
 
     describe("#makeGreeting") {
       it("should greet the world, given no name") {
-        val result = subject.makeGreeting()
-        assert(result == "Hello World!")
+        subject.makeGreeting() shouldEqual("Hello World!")
       }
 
       it("should greet a person by name, given a name") {
-        val result = subject.makeGreeting("George")
-        assert(result == "Hello George!")
+        subject.makeGreeting("George") shouldEqual("Hello George!")
       }
     }
   }
