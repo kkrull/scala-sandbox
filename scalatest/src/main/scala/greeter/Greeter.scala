@@ -1,7 +1,7 @@
 package greeter
 
 class Greeter {
-  def makeGreeting(): String = {
-    "Hello World!"
+  def makeGreeting(target: String = "World"): String = {
+    s"Hello $target!"
   }
 }

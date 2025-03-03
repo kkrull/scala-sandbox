@@ -11,6 +11,12 @@ class GreeterSpec extends AnyFunSpec {
         val result = subject.makeGreeting()
         assert(result == "Hello World!")
       }
+
+      it("should greet a person by name, given a name") {
+        val subject = new Greeter()
+        val result = subject.makeGreeting("George")
+        assert(result == "Hello George!")
+      }
     }
   }
 }
