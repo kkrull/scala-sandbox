@@ -1,8 +1,8 @@
+package greeter
+
 import org.scalatest._
 import org.scalatest.matchers.should._
 import funspec._
-
-import greeter.Greeter
 
 class GreeterSpec extends AnyFunSpec with Matchers {
   describe("Greeter") {

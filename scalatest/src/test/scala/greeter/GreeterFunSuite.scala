@@ -1,7 +1,7 @@
+package greeter
+
 import org.scalatest._
 import funsuite._
-
-import greeter.Greeter
 
 class GreeterFunSuite extends AnyFunSuite {
   test("greeting should address the whole world") {
