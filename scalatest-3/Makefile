@@ -1,4 +1,4 @@
-#. ==ScalaTest==
+#. ==ScalaTest 3==
 
 .PHONY: default
 default: all
@@ -73,7 +73,7 @@ debug: _debug-prefix debug-artifacts debug-paths debug-programs debug-sources #>
 
 .PHONY: _debug-prefix
 _debug-prefix:
-	$(info ==Scala Test==)
+	$(info ==Scala Test 3==)
 	@:
 
 # https://stackoverflow.com/a/47107132/112682
