@@ -16,7 +16,8 @@ default: all
 # https://stackoverflow.com/a/17845120/112682
 SUBDIRS := \
 	programming-in-scala-2015 \
-	sbt-by-example
+	sbt-by-example \
+	scalatest-3
 
 .PHONY: $(SUBDIRS)
 $(SUBDIRS):

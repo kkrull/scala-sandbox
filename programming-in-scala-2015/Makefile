@@ -57,7 +57,7 @@ install:
 	@:
 
 .PHONY: test
-test:
+test: #> Run tests
 	$(SBT) test
 
 .PHONY: uninstall
