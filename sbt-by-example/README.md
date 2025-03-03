@@ -13,7 +13,7 @@ Going through the tutorial at <https://www.scala-sbt.org/1.x/docs/sbt-by-example
 ## Setup
 
 - Install [tools](#tools)
-- ~~[Use `make` and/or `sbt`](#task-automation) to build and test sources.~~
+- [Use `make` and/or `sbt`](#task-automation) to build and test sources.
 
 ## Task Automation
 
