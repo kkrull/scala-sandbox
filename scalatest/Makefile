@@ -1,4 +1,4 @@
-#. ==scalatest==
+#. ==ScalaTest==
 
 .PHONY: default
 default: all

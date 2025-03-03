@@ -36,10 +36,9 @@ Update pre-commit plugins.
 
 Print programs, paths, and other debugging information related to the build, recursively.
 
-### `make help` and `make help-all`
+### `make help`
 
-Use `help` to list relevant targets in this `Makefile` and `help-all` to list targets in this file
-and its descendants.
+Use `help` to list relevant targets in this `Makefile` and its descendants.
 
 ## Standard targets
 
