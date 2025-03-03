@@ -5,7 +5,9 @@ lazy val wholeThing = project
   .in(file("."))
   .settings(
     name := "ScalaTest examples",
+
+    // https://www.scalatest.org/install
     libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.19",
     libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19" % "test",
-    // libraryDependencies += "org.scalatest" %% "scalatest-funspec" % "3.2.19" % "test"
+    resolvers += "Artima Maven Repository" at "https://repo.artima.com/releases"
   )

@@ -39,7 +39,6 @@ jobs:
     - run: java --version
     - run: sbt --version
 
-    #TODO KDK: Add resolver here or in build.sbt, for the extra compiler checks
   scalatest-3-compile:
     defaults:
       run:
