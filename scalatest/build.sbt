@@ -7,5 +7,5 @@ lazy val wholeThing = project
     name := "ScalaTest examples",
     libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.19",
     libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19" % "test",
-    libraryDependencies += "org.scalatest" %% "scalatest-funspec" % "3.2.19" % "test"
+    // libraryDependencies += "org.scalatest" %% "scalatest-funspec" % "3.2.19" % "test"
   )
