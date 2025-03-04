@@ -9,20 +9,25 @@ object RomanNumeral {
       ("I", 1)
     )
 
-    for((baselineLetter, baselineValue) <- letterValues) {
-      if(number > baselineValue)
-        return baselineLetter + convert(number - baselineValue)
-      else if(number == baselineValue)
-        return baselineLetter
+    letterValues.find(pair => pair._2 == number) match {
+      case Some((letter, _)) =>
+        return letter
+      case None =>
+        for((baselineLetter, baselineValue) <- letterValues) {
+          if(number > baselineValue)
+            return baselineLetter + convert(number - baselineValue)
+          else if(number == baselineValue)
+            return baselineLetter
 
-      for((smallerLetter, smallerValue) <- letterValues) {
-        val prependingIsShorterThanAppending = baselineValue / smallerValue > 2
-        val prependingIsPossible = number == (baselineValue - smallerValue)
-        if(prependingIsPossible && prependingIsShorterThanAppending)
-          return smallerLetter + baselineLetter
-      }
+          for((smallerLetter, smallerValue) <- letterValues) {
+            val prependingIsShorterThanAppending = baselineValue / smallerValue > 2
+            val prependingIsPossible = number == (baselineValue - smallerValue)
+            if(prependingIsPossible && prependingIsShorterThanAppending)
+              return smallerLetter + baselineLetter
+          }
+        }
+
+        return "bogus"
     }
-
-    "bogus"
   }
 }
