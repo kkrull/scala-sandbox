@@ -2,6 +2,9 @@ package roman
 
 object RomanNumeral {
   def convert(number: Int): String = {
-    "I".repeat(number)
+    if(number <= 3)
+      "I".repeat(number)
+    else
+      "V" + convert(number - 5)
   }
 }
