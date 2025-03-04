@@ -3,6 +3,7 @@ package roman
 object RomanNumeral {
   def convert(number: Int): String = {
     val letterValues = List(
+      ("L", 50),
       ("X", 10),
       ("V", 5),
       ("I", 1)
