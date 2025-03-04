@@ -6,17 +6,20 @@ import funspec._
 
 class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
   describe("::romanNumeral") {
-    it("should convert numbers less than 4 to that many I's") {
+    it("should return I to represent 1") {
       RomanNumeral.convert(1) shouldEqual("I")
+    }
+
+    it("should repeat I to represent numbers 2-3") {
       RomanNumeral.convert(2) shouldEqual("II")
       RomanNumeral.convert(3) shouldEqual("III")
     }
 
-    it("should convert 5 to V") {
+    it("should return V to represent 5") {
       RomanNumeral.convert(5) shouldEqual("V")
     }
 
-    it("should append I letters when number is over 5") {
+    it("should append I to represent remainders over 5") {
       RomanNumeral.convert(6) shouldEqual("VI")
     }
   }
