@@ -11,6 +11,14 @@ default: all
 
 ## Programs
 
+SBT := sbt
+
+.PHONY: debug-programs
+debug-programs:
+	$(info Programs:)
+	$(info - SBT: $(SBT))
+	@:
+
 ## Project
 
 # https://stackoverflow.com/a/17845120/112682
@@ -49,6 +57,12 @@ pre-commit-run: #> Run pre-commit on all sources
 pre-commit-update: #> Update pre-commit plugins
 	$(PRECOMMIT) autoupdate
 
+#. SBT TARGETS
+
+.PHONY: console
+console: #> Start an interactive session of the scala interpreter
+	$(SBT) --allow-empty -Dsbt.version=1.10.7 console
+
 #. STANDARD TARGETS
 
 .PHONY: all
@@ -70,7 +84,7 @@ uninstall: $(SUBDIRS)
 
 .PHONY: debug
 .NOTPARALLEL: debug
-debug: _debug-prefix debug-project $(SUBDIRS) #> Show debugging information
+debug: _debug-prefix debug-programs debug-project $(SUBDIRS) #> Show debugging information
 
 .PHONY: _debug-prefix
 _debug-prefix:
