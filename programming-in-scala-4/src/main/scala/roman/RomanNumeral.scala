@@ -13,19 +13,19 @@ object RomanNumeral {
       case Some((letter, _exactValue)) =>
         return letter
       case None =>
-        for((baselineLetter, baselineValue) <- letterValues) {
-          if(number > baselineValue)
-            return baselineLetter + convert(number - baselineValue)
-
-          for((smallerLetter, smallerValue) <- letterValues) {
-            val prependingIsShorterThanAppending = baselineValue / smallerValue > 2
-            val prependingIsPossible = number == (baselineValue - smallerValue)
-            if(prependingIsPossible && prependingIsShorterThanAppending)
-              return smallerLetter + baselineLetter
+        for((largeLetter, largeValue) <- letterValues.filter(pair => pair._2 > number)) {
+          for((smallLetter, smallValue) <- letterValues.filter(pair => pair._2 < largeValue)) {
+            if(number == (largeValue - smallValue))
+              return smallLetter + largeLetter
           }
         }
 
-        return "bogus"
+        letterValues.find(pair => pair._2 < number) match {
+          case Some((letter, value)) =>
+            letter + convert(number - value)
+          case None =>
+            "bogus"
+        }
     }
   }
 }
