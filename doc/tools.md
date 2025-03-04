@@ -116,6 +116,16 @@ _A framework for managing and maintaining multi-language pre-commit hooks in Git
   - Homebrew: `brew install pre-commit`
 - `pre-commit install`: Install Git hooks in this repository.
 
+## [Scala](https://www.scala-lang.org/)
+
+_A programming language that scales with you: from small scripts to large multiplatform
+applications._
+
+- Documentation:
+  - Scala Standard Library: <https://www.scala-lang.org/api/2.13.16/>
+- Installation:
+  - SDKMAN!: `sdk install scala [version]`
+
 ## [SDKMAN!](https://sdkman.io/install/)
 
 _Manages multiple \[JVM-based] Software Development Kits on Unix systems._

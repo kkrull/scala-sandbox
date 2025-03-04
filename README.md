@@ -13,6 +13,8 @@ See [GitHub Actions](./doc/github-actions.md).
 - [`sbt-by-example`](./sbt-by-example/README.md): Going through the tutorial.
 - [`scalatest-3`](./scalatest-3/README.md): Using ScalaTest.
 
+There is also `scripts/`, containing scripts that run on the `scala` interpreter.
+
 ## Setup
 
 - Install repository-wide tools:
