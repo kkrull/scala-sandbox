@@ -1,0 +1,74 @@
+name: Programming in Scala 4th Edition
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/programming-in-scala-4.yml'
+      - 'programming-in-scala-4/**'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/programming-in-scala-4.yml'
+      - 'programming-in-scala-4/**'
+  workflow_dispatch:
+
+env:
+  java_distribution: temurin
+  java_version: '21'
+  working_directory: ./programming-in-scala-4
+
+permissions:
+  contents: read
+
+jobs:
+  programming-in-scala:
+    defaults:
+      run:
+        working-directory: ${{ env.working_directory }}
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with:
+        cache: 'sbt'
+        distribution: ${{ env.java_distribution }}
+        java-version: ${{ env.java_version }}
+    - uses: sbt/setup-sbt@v1
+    - run: java --version
+    - run: sbt --version
+
+  programming-in-scala-compile:
+    defaults:
+      run:
+        working-directory: ${{ env.working_directory }}
+    needs: programming-in-scala
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with:
+        cache: 'sbt'
+        distribution: ${{ env.java_distribution }}
+        java-version: ${{ env.java_version }}
+    - uses: sbt/setup-sbt@v1
+    - run: sbt compile
+
+  programming-in-scala-test:
+    defaults:
+      run:
+        working-directory: ${{ env.working_directory }}
+    needs: programming-in-scala-compile
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with:
+        cache: 'sbt'
+        distribution: ${{ env.java_distribution }}
+        java-version: ${{ env.java_version }}
+    - uses: sbt/setup-sbt@v1
+    - run: sbt test
