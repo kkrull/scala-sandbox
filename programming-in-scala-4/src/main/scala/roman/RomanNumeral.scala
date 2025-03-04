@@ -2,13 +2,19 @@ package roman
 
 object RomanNumeral {
   def convert(number: Int): String = {
-    if(number >= 5 && number < 10)
-      "V" + convert(number - 5)
-    else if(number == (5-1))
-      "IV"
-    else if(number <= 3)
-      "I".repeat(number)
-    else
+    if(number > 10)
+      convert(10) + convert(number - 10)
+    else if(number == 10)
       "X"
+    else if(number == (10-1))
+      convert(1) + convert(10)
+    else if(number > 5)
+      "V" + convert(number - 5)
+    else if(number == 5)
+      "V"
+    else if(number == (5-1))
+      convert(1) + convert(5)
+    else
+      "I".repeat(number)
   }
 }
