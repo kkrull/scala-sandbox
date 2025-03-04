@@ -10,14 +10,12 @@ object RomanNumeral {
     )
 
     letterValues.find(pair => pair._2 == number) match {
-      case Some((letter, _)) =>
+      case Some((letter, _exactValue)) =>
         return letter
       case None =>
         for((baselineLetter, baselineValue) <- letterValues) {
           if(number > baselineValue)
             return baselineLetter + convert(number - baselineValue)
-          else if(number == baselineValue)
-            return baselineLetter
 
           for((smallerLetter, smallerValue) <- letterValues) {
             val prependingIsShorterThanAppending = baselineValue / smallerValue > 2
