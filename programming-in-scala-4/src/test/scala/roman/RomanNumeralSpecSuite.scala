@@ -28,14 +28,16 @@ class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
       RomanNumeral.convert(20) shouldEqual("XX")
     }
 
-    it("should append I to add 1 to a letter's value") {
+    it("should append a letter with a small value to a letter with a larger value to add them up") {
       RomanNumeral.convert(6) shouldEqual("VI")
       RomanNumeral.convert(12) shouldEqual("XII")
+      RomanNumeral.convert(15) shouldEqual("XV")
     }
 
-    it("should prepend I to subtract 1 from a letter's value") {
+    it("should prepend a letter with a small value to a letter with a larger value to subtract the smaller value from the larger one") {
       RomanNumeral.convert(4) shouldEqual("IV")
       RomanNumeral.convert(9) shouldEqual("IX")
+      RomanNumeral.convert(45) shouldEqual("VL")
     }
   }
 }

@@ -14,8 +14,11 @@ object RomanNumeral {
         return letter + convert(number - value)
       else if(number == value)
         return letter
-      else if(number == (value - 1))
-        return convert(1) + convert(value)
+
+      for((smallLetter, smallValue) <- letterValues) {
+        if(value / smallValue > 2 && number == (value - smallValue))
+          return smallLetter + letter
+      }
     }
 
     "bogus"
