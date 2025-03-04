@@ -19,8 +19,16 @@ class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
       RomanNumeral.convert(5) shouldEqual("V")
     }
 
-    it("should append I to represent remainders over 5") {
+    it("should append I to add 1 to a letter's value") {
       RomanNumeral.convert(6) shouldEqual("VI")
+    }
+
+    it("should prepend I to subtract 1 from a letter's value") {
+      RomanNumeral.convert(4) shouldEqual("IV")
+    }
+
+    it("should return X to represent 10") {
+      RomanNumeral.convert(10) shouldEqual("X")
     }
   }
 }
