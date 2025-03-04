@@ -141,3 +141,5 @@ _Build tool and task automation for Scala projects._
 - Installation:
   - Homebrew (not recommended): `brew install sbt`
   - SDKMAN! (recommended): `sdk install sbt`
+- Plugins (and resolvers):
+  - SuperSafe / ScalaTest: <https://www.scalatest.org/install>

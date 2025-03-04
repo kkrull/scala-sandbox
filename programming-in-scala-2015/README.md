@@ -6,10 +6,9 @@ Programming in Scala.
 ## Contents
 
 - [`doc/`](./doc/README.md): Documentation, including project setup.
-- `core/`: Core library.
 - `project/`: Code for the meta build.
 - `src/main/scala/`: Production code for the main package.
-- `src/main/test/`: Test code for the main package.
+- `src/test/scala/`: Test code for the main package.
 
 ## Setup
 
