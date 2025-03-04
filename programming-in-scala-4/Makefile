@@ -1,4 +1,4 @@
-#. ==Programming in Scala 2015==
+#. ==Programming in Scala 4th Edition==
 
 .PHONY: default
 default: all
@@ -73,7 +73,7 @@ debug: _debug-prefix debug-artifacts debug-paths debug-programs debug-sources #>
 
 .PHONY: _debug-prefix
 _debug-prefix:
-	$(info ==Programming in Scala 2015==)
+	$(info ==Programming in Scala 4th Edition==)
 	@:
 
 # https://stackoverflow.com/a/47107132/112682

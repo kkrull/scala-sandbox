@@ -1,0 +1,25 @@
+# Initially created by https://www.toptal.com/developers/gitignore/api/sbt,scala
+
+## Simple Build Tool (sbt)
+
+# http://www.scala-sbt.org/release/docs/Getting-Started/Directories.html#configuring-version-control
+.cache
+.history
+.lib/
+dist/*
+lib_managed/
+project/boot/
+project/plugins/project/
+src_managed/
+target/
+
+# SBT Patch
+.bsp/
+
+## Scala
+
+*.class
+*.log
+
+# virtual machine crash logs: http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*

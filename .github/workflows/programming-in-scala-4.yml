@@ -1,22 +1,22 @@
-name: Programming in Scala 2015
+name: Programming in Scala 4th Edition
 
 on:
   pull_request:
     branches: [main]
     paths:
-      - '.github/workflows/programming-in-scala-2015.yml'
-      - 'programming-in-scala-2015/**'
+      - '.github/workflows/programming-in-scala-4.yml'
+      - 'programming-in-scala-4/**'
   push:
     branches: [main]
     paths:
-      - '.github/workflows/programming-in-scala-2015.yml'
-      - 'programming-in-scala-2015/**'
+      - '.github/workflows/programming-in-scala-4.yml'
+      - 'programming-in-scala-4/**'
   workflow_dispatch:
 
 env:
   java_distribution: temurin
   java_version: '21'
-  working_directory: ./programming-in-scala-2015
+  working_directory: ./programming-in-scala-4
 
 permissions:
   contents: read

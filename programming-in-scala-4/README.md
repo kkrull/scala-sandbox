@@ -1,7 +1,6 @@
-# Programming in Scala Book Club
+# Programming in Scala (4th Edition)
 
-The original code I wrote as part of a book club that was working through an early edition of
-Programming in Scala.
+Start using ScalaTest again, from Programming in Scala 4th Edition (2019).
 
 ## Contents
 
@@ -28,5 +27,6 @@ This project uses:
 Some tools need to be installed ahead of time:
 
 - [GNU Make](../doc/tools.md#gnu-make)
+- [jEnv](../doc/tools.md#java-environment-manager-jenv)
 - [SDKMAN!](../doc/tools.md#sdkman)
 - [`sbt`](../doc/tools.md#simple-build-tool-sbt)
