@@ -1,4 +1,4 @@
-package greeter
+package greet
 
 class Greeter {
   def makeGreeting(): String = {
