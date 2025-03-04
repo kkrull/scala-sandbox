@@ -5,6 +5,8 @@ object Greeter {
     val greeter = new Greeter()
     println(greeter.makeGreeting())
   }
+
+  def apply(): Greeter = new Greeter()
 }
 
 class Greeter {
