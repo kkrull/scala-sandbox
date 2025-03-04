@@ -23,7 +23,7 @@ debug-programs:
 
 # https://stackoverflow.com/a/17845120/112682
 SUBDIRS := \
-	programming-in-scala-2015 \
+	programming-in-scala-2 \
 	sbt-by-example \
 	scalatest-3
 

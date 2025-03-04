@@ -8,8 +8,8 @@ See [GitHub Actions](./doc/github-actions.md).
 
 ## Projects
 
-- [`programming-in-scala-2015`](./programming-in-scala-2015/README.md): Book club for Programming in
-  Scala, circa 2015.
+- [`programming-in-scala-2`](./programming-in-scala-2/README.md): Book club for Programming in
+  Scala, second edition.
 - [`sbt-by-example`](./sbt-by-example/README.md): Going through the tutorial.
 - [`scalatest-3`](./scalatest-3/README.md): Using ScalaTest.
 
