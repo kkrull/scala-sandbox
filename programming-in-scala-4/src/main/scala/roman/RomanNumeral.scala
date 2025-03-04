@@ -16,9 +16,9 @@ object RomanNumeral {
         return baselineLetter
 
       for((smallerLetter, smallerValue) <- letterValues) {
-        val prependingMakesSense = baselineValue / smallerValue > 2
-        val prependingPossible = number == (baselineValue - smallerValue)
-        if(prependingPossible && prependingMakesSense)
+        val prependingIsShorterThanAppending = baselineValue / smallerValue > 2
+        val prependingIsPossible = number == (baselineValue - smallerValue)
+        if(prependingIsPossible && prependingIsShorterThanAppending)
           return smallerLetter + baselineLetter
       }
     }
