@@ -9,15 +9,17 @@ object RomanNumeral {
       ("I", 1)
     )
 
-    for((letter, value) <- letterValues) {
-      if(number > value)
-        return letter + convert(number - value)
-      else if(number == value)
-        return letter
+    for((baselineLetter, baselineValue) <- letterValues) {
+      if(number > baselineValue)
+        return baselineLetter + convert(number - baselineValue)
+      else if(number == baselineValue)
+        return baselineLetter
 
-      for((smallLetter, smallValue) <- letterValues) {
-        if(value / smallValue > 2 && number == (value - smallValue))
-          return smallLetter + letter
+      for((smallerLetter, smallerValue) <- letterValues) {
+        val prependingMakesSense = baselineValue / smallerValue > 2
+        val prependingPossible = number == (baselineValue - smallerValue)
+        if(prependingPossible && prependingMakesSense)
+          return smallerLetter + baselineLetter
       }
     }
 
