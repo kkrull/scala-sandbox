@@ -11,6 +11,7 @@ See [GitHub Actions](./doc/github-actions.md).
 - [`programming-in-scala-2015`](./programming-in-scala-2015/README.md): Book club for Programming in
   Scala, circa 2015.
 - [`sbt-by-example`](./sbt-by-example/README.md): Going through the tutorial.
+- [`scalatest-3`](./scalatest-3/README.md): Using ScalaTest.
 
 ## Setup
 
