@@ -18,9 +18,10 @@ class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
       RomanNumeral.convert(10) shouldEqual("X")
     }
 
-    it("should repeat I to represent numbers 2-3") {
+    it("should repeat a letter to get multiples of its value") {
       RomanNumeral.convert(2) shouldEqual("II")
       RomanNumeral.convert(3) shouldEqual("III")
+      RomanNumeral.convert(20) shouldEqual("XX")
     }
 
     it("should append I to add 1 to a letter's value") {
