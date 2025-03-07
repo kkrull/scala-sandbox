@@ -1,7 +1,9 @@
 package roman
 
+import scala.collection.immutable.ListMap
+
 object RomanNumeral {
-  val NumberToLetter = Map(
+  val NumberToLetter = ListMap[Int, String](
     10 -> "X",
     5 -> "V",
     1 -> "I"
@@ -12,16 +14,17 @@ object RomanNumeral {
       case Some(letter) =>
         letter
       case None =>
-        smallValueMadeBigger(number)
+        letterFollowedByRemainder(number)
     }
   }
 
-  private def smallValueMadeBigger(number: Int): String = {
-    NumberToLetter get(number - 1) match {
-      case Some(letter) =>
-        letter + convert(1)
+  private def letterFollowedByRemainder(number: Int): String = {
+    val smallerPair = NumberToLetter.find(pair => pair._1 < number)
+    smallerPair match {
+      case Some((smallerNumber, letter)) =>
+        letter + convert(number - smallerNumber)
       case None =>
-        "smallValueMadeBigger"
+        "letterFollowedByRemainder"
     }
   }
 }
