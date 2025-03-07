@@ -7,8 +7,8 @@ import funspec._
 class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
   describe("RomanNumeral") {
     describe("convert") {
-      it("should exist") {
-        "RomanNumeral.convert(1)" should compile
+      it("should convert 1 to I") {
+        RomanNumeral.convert(1) shouldEqual "I"
       }
     }
   }
