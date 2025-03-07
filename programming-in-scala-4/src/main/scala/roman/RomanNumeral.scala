@@ -20,12 +20,24 @@ object RomanNumeral {
   }
 
   private def numberAsMultipleLetters(number: Int): String = {
-    NumberToLetter.get(number + 1) match {
-      case Some(letterWithHigherValue) =>
-        convert(1) + letterWithHigherValue
+    lettersThatSubtract(number) match {
+      case Some((prefixToSubtract, nominalLetter)) =>
+        prefixToSubtract + nominalLetter
       case None =>
         lettersThatAdd(number)
     }
+  }
+
+  private def lettersThatSubtract(number: Int): Option[(String, String)] = {
+    for {
+      highPair <- NumberToLetter
+      lowPair <- NumberToLetter.filter(pair => pair._1 < highPair._1)
+      if number == (-lowPair._1 + highPair._1)
+    } {
+      return Some((lowPair._2, highPair._2))
+    }
+
+    return None
   }
 
   private def lettersThatAdd(number: Int): String = {
