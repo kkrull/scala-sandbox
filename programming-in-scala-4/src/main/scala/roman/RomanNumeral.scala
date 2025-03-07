@@ -33,11 +33,9 @@ object RomanNumeral {
   }
 
   private def letterWithAddedSuffix(number: Int): String = {
-    NumberToLetter.find(pair => pair._1 < number) match {
-      case Some((smallerNumber, letter)) =>
-        letter + convert(number - smallerNumber)
-      case None =>
-        "letterWithAddedSuffix"
-    }
+    NumberToLetter.find(pair => pair._1 < number)
+      .headOption
+      .map((pair) => pair._2 + convert(number - pair._1))
+      .get
   }
 }
