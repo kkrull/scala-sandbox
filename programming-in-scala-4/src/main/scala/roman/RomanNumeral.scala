@@ -15,20 +15,20 @@ object RomanNumeral {
       case Some(letterWithExactValue) =>
         letterWithExactValue
       case None =>
-        thenTryLetterWithPrefix(number)
+        numberAsMultipleLetters(number)
     }
   }
 
-  private def thenTryLetterWithPrefix(number: Int): String = {
+  private def numberAsMultipleLetters(number: Int): String = {
     NumberToLetter.get(number + 1) match {
       case Some(letterWithHigherValue) =>
         convert(1) + letterWithHigherValue
       case None =>
-        elseLetterWithSuffix(number)
+        lettersThatAdd(number)
     }
   }
 
-  private def elseLetterWithSuffix(number: Int): String = {
+  private def lettersThatAdd(number: Int): String = {
     NumberToLetter.find(pair => pair._1 < number) match {
       case Some((smallerNumber, letter)) =>
         letter + convert(number - smallerNumber)
