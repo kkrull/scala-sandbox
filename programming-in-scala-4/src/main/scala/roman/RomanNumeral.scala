@@ -2,6 +2,7 @@ package roman
 
 object RomanNumeral {
   val NumberToLetter = Map(
+    (10 -> "X"),
     (5 -> "V"),
     (1 -> "I")
   )
