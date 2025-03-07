@@ -11,7 +11,7 @@ object RomanNumeral {
   )
 
   def convert(number: Int): String = {
-    (NumberToLetter get(number), NumberToLetter get(number + 1)) match {
+    (exactValue(number), NumberToLetter get(number + 1)) match {
       case (Some(letterWithExactValue), _) =>
         letterWithExactValue
       case (_, Some(letterWithHigherValue)) =>
@@ -20,6 +20,8 @@ object RomanNumeral {
         letterFollowedByRemainder(number)
     }
   }
+
+  private def exactValue(number: Int): Option[String] = NumberToLetter.get(number)
 
   private def letterFollowedByRemainder(number: Int): String = {
     NumberToLetter.find(pair => pair._1 < number) match {
