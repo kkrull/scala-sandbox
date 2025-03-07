@@ -11,38 +11,33 @@ object RomanNumeral {
   )
 
   def convert(number: Int): String = {
-    NumberToLetter.get(number) match {
-      case Some(letterWithExactValue) =>
-        letterWithExactValue
-      case None =>
-        numberAsMultipleLetters(number)
-    }
+    NumberToLetter.getOrElse(
+      number,
+      numberAsMultipleLetters(number)
+    )
   }
 
   private def numberAsMultipleLetters(number: Int): String = {
-    lettersThatSubtract(number) match {
-      case Some(letterWithPrefix) =>
-        letterWithPrefix
-      case None =>
-        lettersThatAdd(number)
-    }
+    letterWithSubtractingPrefix(number)
+      .headOption
+      .getOrElse(letterWithAddedSuffix(number))
   }
 
-  private def lettersThatSubtract(number: Int): Option[String] = {
+  private def letterWithSubtractingPrefix(number: Int): Iterable[String] = {
     NumberToLetter.flatMap(highPair =>
       NumberToLetter
         .filter(lowPair => lowPair._1 < highPair._1)
         .filter(lowPair => number == (-lowPair._1 + highPair._1))
         .map(lowPair => s"${lowPair._2}${highPair._2}")
-    ).headOption
+    )
   }
 
-  private def lettersThatAdd(number: Int): String = {
+  private def letterWithAddedSuffix(number: Int): String = {
     NumberToLetter.find(pair => pair._1 < number) match {
       case Some((smallerNumber, letter)) =>
         letter + convert(number - smallerNumber)
       case None =>
-        "letterFollowedByRemainder"
+        "letterWithAddedSuffix"
     }
   }
 }
