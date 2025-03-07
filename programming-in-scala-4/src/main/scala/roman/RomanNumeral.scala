@@ -19,8 +19,7 @@ object RomanNumeral {
   }
 
   private def letterFollowedByRemainder(number: Int): String = {
-    val smallerPair = NumberToLetter.find(pair => pair._1 < number)
-    smallerPair match {
+    NumberToLetter.find(pair => pair._1 < number) match {
       case Some((smallerNumber, letter)) =>
         letter + convert(number - smallerNumber)
       case None =>
