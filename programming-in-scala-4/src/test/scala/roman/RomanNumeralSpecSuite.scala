@@ -4,12 +4,6 @@ import org.scalatest._
 import org.scalatest.matchers.should._
 import funspec._
 
-object RomanNumeral {
-  def convert(number: Int): String = {
-    "bogus"
-  }
-}
-
 class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
   describe("RomanNumeral") {
     describe("convert") {
