@@ -9,16 +9,19 @@ object RomanNumeral {
 
   def convert(number: Int): String = {
     NumberToLetter get(number) match {
-      case Some(letter) => letter
+      case Some(letter) =>
+        letter
       case None =>
-        if(number == (10+1))
-          convert(number - 1) + convert(1)
-        else if(number == (5+1))
-          convert(number - 1) + convert(1)
-        else if(number == (1+1))
-          convert(number - 1) + convert(1)
-        else
-          "bogus"
+        smallValueMadeBigger(number)
+    }
+  }
+
+  private def smallValueMadeBigger(number: Int): String = {
+    NumberToLetter get(number - 1) match {
+      case Some(letter) =>
+        letter + convert(1)
+      case None =>
+        "smallValueMadeBigger"
     }
   }
 }
