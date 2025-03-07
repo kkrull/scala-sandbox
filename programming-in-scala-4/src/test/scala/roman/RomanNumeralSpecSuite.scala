@@ -30,6 +30,10 @@ class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
       it("should increment 10 by appending I to X") {
         RomanNumeral.convert(11) shouldEqual "XI"
       }
+
+      ignore("should increment by 1 or more, by appending I as many times as necessary") {
+        RomanNumeral.convert(3) shouldEqual "III"
+      }
     }
   }
 }

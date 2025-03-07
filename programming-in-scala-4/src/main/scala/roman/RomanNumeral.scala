@@ -2,9 +2,9 @@ package roman
 
 object RomanNumeral {
   val NumberToLetter = Map(
-    (10 -> "X"),
-    (5 -> "V"),
-    (1 -> "I")
+    10 -> "X",
+    5 -> "V",
+    1 -> "I"
   )
 
   def convert(number: Int): String = {
