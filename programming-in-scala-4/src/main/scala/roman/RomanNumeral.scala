@@ -11,19 +11,24 @@ object RomanNumeral {
   )
 
   def convert(number: Int): String = {
-    (exactValue(number), NumberToLetter get(number + 1)) match {
-      case (Some(letterWithExactValue), _) =>
+    NumberToLetter.get(number) match {
+      case Some(letterWithExactValue) =>
         letterWithExactValue
-      case (_, Some(letterWithHigherValue)) =>
-        convert(1) + letterWithHigherValue
-      case (None, None) =>
-        letterFollowedByRemainder(number)
+      case None =>
+        thenTryLetterWithPrefix(number)
     }
   }
 
-  private def exactValue(number: Int): Option[String] = NumberToLetter.get(number)
+  private def thenTryLetterWithPrefix(number: Int): String = {
+    NumberToLetter.get(number + 1) match {
+      case Some(letterWithHigherValue) =>
+        convert(1) + letterWithHigherValue
+      case None =>
+        elseLetterWithSuffix(number)
+    }
+  }
 
-  private def letterFollowedByRemainder(number: Int): String = {
+  private def elseLetterWithSuffix(number: Int): String = {
     NumberToLetter.find(pair => pair._1 < number) match {
       case Some((smallerNumber, letter)) =>
         letter + convert(number - smallerNumber)
