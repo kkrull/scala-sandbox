@@ -11,7 +11,9 @@ object RomanNumeral {
     NumberToLetter get(number) match {
       case Some(letter) => letter
       case None =>
-        if(number == (5+1))
+        if(number == (10+1))
+          convert(number -1) + convert(1)
+        else if(number == (5+1))
           convert(number - 1) + convert(1)
         else if(number == (1+1))
           convert(number - 1) + convert(1)
