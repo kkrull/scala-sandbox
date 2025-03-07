@@ -24,7 +24,7 @@ class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
         RomanNumeral.convert(3) shouldEqual "III"
       }
 
-      ignore("should decrement 5 by prepending up to one I to V") {
+      it("should decrement 5 by prepending up to one I to V") {
         RomanNumeral.convert(4) shouldEqual "IV"
       }
 

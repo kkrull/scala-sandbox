@@ -10,10 +10,12 @@ object RomanNumeral {
   )
 
   def convert(number: Int): String = {
-    NumberToLetter get(number) match {
-      case Some(letter) =>
-        letter
-      case None =>
+    (NumberToLetter get(number), NumberToLetter get(number + 1)) match {
+      case (Some(letterWithExactValue), _) =>
+        letterWithExactValue
+      case (_, Some(letterWithHigherValue)) =>
+        convert(1) + letterWithHigherValue
+      case (None, None) =>
         letterFollowedByRemainder(number)
     }
   }
