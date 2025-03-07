@@ -48,6 +48,14 @@ class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
         RomanNumeral.convert(15) shouldEqual "XV"
         RomanNumeral.convert(16) shouldEqual "XVI"
       }
+
+      ignore("should decrease 50 by 5 by prepending V") {
+        RomanNumeral.convert(45) shouldEqual "VL"
+      }
+
+      ignore("should decrease 50 by 10 by prepending X") {
+        RomanNumeral.convert(40) shouldEqual "XL"
+      }
     }
   }
 }
