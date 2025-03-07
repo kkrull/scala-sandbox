@@ -15,8 +15,12 @@ class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
         RomanNumeral.convert(5) shouldEqual "V"
       }
 
-      it("should increment a number by appending I to another letter") {
+      it("should increment I by appending I") {
         RomanNumeral.convert(2) shouldEqual "II"
+      }
+
+      it("should increment V by appending I") {
+        RomanNumeral.convert(6) shouldEqual "VI"
       }
     }
   }
