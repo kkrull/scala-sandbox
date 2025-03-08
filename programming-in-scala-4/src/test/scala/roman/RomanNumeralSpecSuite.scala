@@ -23,6 +23,10 @@ class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
         RomanNumeral.convert(50) shouldEqual "L"
       }
 
+      it("should convert 100 to C") {
+        RomanNumeral.convert(100) shouldEqual "C"
+      }
+
       it("should increment 1 by appending one or more I's to I") {
         RomanNumeral.convert(2) shouldEqual "II"
         RomanNumeral.convert(3) shouldEqual "III"
@@ -55,6 +59,14 @@ class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
 
       it("should decrease 50 by 10 by prepending X") {
         RomanNumeral.convert(40) shouldEqual "XL"
+      }
+
+      it("should decrease 100 by 5 by prepending V") {
+        RomanNumeral.convert(95) shouldEqual "VC"
+      }
+
+      it("should decrease 100 by 10 by prepending X") {
+        RomanNumeral.convert(90) shouldEqual "XC"
       }
     }
   }
