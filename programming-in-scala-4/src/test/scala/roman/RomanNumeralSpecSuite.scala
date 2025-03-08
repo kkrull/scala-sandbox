@@ -5,39 +5,67 @@ import org.scalatest.matchers.should._
 import funspec._
 
 class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
-  describe("::romanNumeral") {
-    it("should return I to represent 1") {
-      RomanNumeral.convert(1) shouldEqual("I")
-    }
+  describe("RomanNumeral") {
+    describe("convert") {
+      it("should convert 1 to I") { RomanNumeral.convert(1) shouldEqual "I" }
+      it("should convert 5 to V") { RomanNumeral.convert(5) shouldEqual "V" }
+      it("should convert 10 to X") { RomanNumeral.convert(10) shouldEqual "X" }
+      it("should convert 50 to L") { RomanNumeral.convert(50) shouldEqual "L" }
+      it("should convert 100 to C") { RomanNumeral.convert(100) shouldEqual "C" }
+      it("should convert 500 to D") { RomanNumeral.convert(500) shouldEqual "D" }
+      it("should convert 1000 to M") { RomanNumeral.convert(1000) shouldEqual "M" }
 
-    it("should return V to represent 5") {
-      RomanNumeral.convert(5) shouldEqual("V")
-    }
+      it("should increment 1 by appending one or more I's to I") {
+        RomanNumeral.convert(2) shouldEqual "II"
+        RomanNumeral.convert(3) shouldEqual "III"
+      }
 
-    it("should return X to represent 10") {
-      RomanNumeral.convert(10) shouldEqual("X")
-    }
+      it("should decrease 5 by prepending up to one I to V") {
+        RomanNumeral.convert(4) shouldEqual "IV"
+      }
 
-    it("should return L to represent 50") {
-      RomanNumeral.convert(50) shouldEqual("L")
-    }
+      it("should increase 5 by appending one or more I's to V") {
+        RomanNumeral.convert(6) shouldEqual "VI"
+      }
 
-    it("should repeat a letter to get multiples of its value") {
-      RomanNumeral.convert(2) shouldEqual("II")
-      RomanNumeral.convert(3) shouldEqual("III")
-      RomanNumeral.convert(20) shouldEqual("XX")
-    }
+      it("should decrease 10 by prepending up to one letter of lesser value") {
+        RomanNumeral.convert(9) shouldEqual "IX"
+      }
 
-    it("should append a letter with a small value to a letter with a larger value to add them up") {
-      RomanNumeral.convert(6) shouldEqual("VI")
-      RomanNumeral.convert(12) shouldEqual("XII")
-      RomanNumeral.convert(15) shouldEqual("XV")
-    }
+      it("should increase 10 by appending one letters of lesser value") {
+        RomanNumeral.convert(11) shouldEqual "XI"
+        RomanNumeral.convert(15) shouldEqual "XV"
+        RomanNumeral.convert(16) shouldEqual "XVI"
+      }
 
-    it("should prepend a letter with a small value to a letter with a larger value to subtract the smaller value from the larger one") {
-      RomanNumeral.convert(4) shouldEqual("IV")
-      RomanNumeral.convert(9) shouldEqual("IX")
-      RomanNumeral.convert(45) shouldEqual("VL")
+      it("should decrease 50 by prepending up to one letter of lesser value") {
+        RomanNumeral.convert(45) shouldEqual "VL"
+        RomanNumeral.convert(40) shouldEqual "XL"
+      }
+
+      it("should decrease 100 by prepending up to one letter of lesser value") {
+        RomanNumeral.convert(95) shouldEqual "VC"
+        RomanNumeral.convert(90) shouldEqual "XC"
+      }
+
+      it("should decrease 500 by prepending up to one letter of lesser value") {
+        RomanNumeral.convert(495) shouldEqual "VD"
+        RomanNumeral.convert(490) shouldEqual "XD"
+        RomanNumeral.convert(450) shouldEqual "LD"
+        RomanNumeral.convert(400) shouldEqual "CD"
+      }
+
+      it("should decrease 1000 by prepending up to one letter of lesser value") {
+        RomanNumeral.convert(995) shouldEqual "VM"
+        RomanNumeral.convert(990) shouldEqual "XM"
+        RomanNumeral.convert(950) shouldEqual "LM"
+        RomanNumeral.convert(900) shouldEqual "CM"
+      }
+
+      ignore("should make a suffix out of another pair of letters with a prefix") {}
+      ignore("should handle a 4 digit year like you see in movie credits") {
+        RomanNumeral.convert(1984) shouldEqual "MCMLXXXIV"
+      }
     }
   }
 }

@@ -1,31 +1,37 @@
 package roman
 
+import scala.collection.immutable.ListMap
+
 object RomanNumeral {
+  val NumberToLetter = ListMap[Int, String](
+    1000 -> "M",
+    500 -> "D",
+    100 -> "C",
+    50 -> "L",
+    10 -> "X",
+    5 -> "V",
+    1 -> "I"
+  )
+
   def convert(number: Int): String = {
-    val letterValues = List(
-      ("L", 50),
-      ("X", 10),
-      ("V", 5),
-      ("I", 1)
-    )
+    NumberToLetter.get(number)
+      .orElse(letterWithSubtractingPrefix(number))
+      .orElse(letterWithAddedSuffix(number))
+      .get
+  }
 
-    letterValues.find(pair => pair._2 == number) match {
-      case Some((letter, _exactValue)) =>
-        return letter
-      case None =>
-        for((largeLetter, largeValue) <- letterValues.filter(pair => pair._2 > number)) {
-          for((smallLetter, smallValue) <- letterValues.filter(pair => pair._2 < largeValue)) {
-            if(number == (largeValue - smallValue))
-              return smallLetter + largeLetter
-          }
-        }
+  private def letterWithSubtractingPrefix(number: Int): Option[String] = {
+    NumberToLetter.flatMap(highPair =>
+      NumberToLetter
+        .filter(lowPair => lowPair._1 < highPair._1)
+        .filter(lowPair => number == (-lowPair._1 + highPair._1))
+        .map(lowPair => s"${lowPair._2}${highPair._2}")
+    ).headOption
+  }
 
-        letterValues.find(pair => pair._2 < number) match {
-          case Some((letter, value)) =>
-            letter + convert(number - value)
-          case None =>
-            "bogus"
-        }
-    }
+  private def letterWithAddedSuffix(number: Int): Option[String] = {
+    NumberToLetter.find(pair => pair._1 < number)
+      .map((pair) => pair._2 + convert(number - pair._1))
+      .headOption
   }
 }
