@@ -11,31 +11,24 @@ object RomanNumeral {
   )
 
   def convert(number: Int): String = {
-    NumberToLetter.getOrElse(
-      number,
-      numberAsMultipleLetters(number)
-    )
+    NumberToLetter.get(number)
+      .orElse(letterWithSubtractingPrefix(number))
+      .orElse(letterWithAddedSuffix(number))
+      .get
   }
 
-  private def numberAsMultipleLetters(number: Int): String = {
-    letterWithSubtractingPrefix(number)
-      .headOption
-      .getOrElse(letterWithAddedSuffix(number))
-  }
-
-  private def letterWithSubtractingPrefix(number: Int): Iterable[String] = {
+  private def letterWithSubtractingPrefix(number: Int): Option[String] = {
     NumberToLetter.flatMap(highPair =>
       NumberToLetter
         .filter(lowPair => lowPair._1 < highPair._1)
         .filter(lowPair => number == (-lowPair._1 + highPair._1))
         .map(lowPair => s"${lowPair._2}${highPair._2}")
-    )
+    ).headOption
   }
 
-  private def letterWithAddedSuffix(number: Int): String = {
+  private def letterWithAddedSuffix(number: Int): Option[String] = {
     NumberToLetter.find(pair => pair._1 < number)
-      .headOption
       .map((pair) => pair._2 + convert(number - pair._1))
-      .get
+      .headOption
   }
 }
