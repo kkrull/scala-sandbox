@@ -13,6 +13,7 @@ class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
       it("should convert 50 to L") { RomanNumeral.convert(50) shouldEqual "L" }
       it("should convert 100 to C") { RomanNumeral.convert(100) shouldEqual "C" }
       it("should convert 500 to D") { RomanNumeral.convert(500) shouldEqual "D" }
+      it("should convert 1000 to M") { RomanNumeral.convert(1000) shouldEqual "M" }
 
       it("should increment 1 by appending one or more I's to I") {
         RomanNumeral.convert(2) shouldEqual "II"
@@ -52,6 +53,18 @@ class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
         RomanNumeral.convert(490) shouldEqual "XD"
         RomanNumeral.convert(450) shouldEqual "LD"
         RomanNumeral.convert(400) shouldEqual "CD"
+      }
+
+      it("should decrease 1000 by prepending up to one letter of lesser value") {
+        RomanNumeral.convert(995) shouldEqual "VM"
+        RomanNumeral.convert(990) shouldEqual "XM"
+        RomanNumeral.convert(950) shouldEqual "LM"
+        RomanNumeral.convert(900) shouldEqual "CM"
+      }
+
+      ignore("should make a suffix out of another pair of letters with a prefix") {}
+      ignore("should handle a 4 digit year like you see in movie credits") {
+        RomanNumeral.convert(1984) shouldEqual "MCMLXXXIV"
       }
     }
   }

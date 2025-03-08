@@ -4,6 +4,7 @@ import scala.collection.immutable.ListMap
 
 object RomanNumeral {
   val NumberToLetter = ListMap[Int, String](
+    1000 -> "M",
     500 -> "D",
     100 -> "C",
     50 -> "L",
