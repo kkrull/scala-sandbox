@@ -61,11 +61,6 @@ class RomanNumeralSpecSuite extends AnyFunSpec with Matchers {
         RomanNumeral.convert(950) shouldEqual "LM"
         RomanNumeral.convert(900) shouldEqual "CM"
       }
-
-      ignore("should make a suffix out of another pair of letters with a prefix") {}
-      ignore("should handle a 4 digit year like you see in movie credits") {
-        RomanNumeral.convert(1984) shouldEqual "MCMLXXXIV"
-      }
     }
   }
 }
