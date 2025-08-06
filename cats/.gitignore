@@ -1,0 +1,4 @@
+# sbt
+
+project/*
+!project/build.properties
