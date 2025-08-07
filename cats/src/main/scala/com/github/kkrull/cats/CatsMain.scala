@@ -6,7 +6,7 @@ import scala.concurrent.Future
 
 case class User(id: Int, name: String)
 
-class UserService {
+object CatsMain extends App {
   def findUser(name: String): Future[Option[User]] = {
     name match {
       case "fails" => Future.failed(new RuntimeException(s"failed to look up user: ${name}"))
@@ -14,17 +14,13 @@ class UserService {
       case "reachable" => Future.successful(Some(User(1, "reachable")))
     }
   }
-}
 
-object CatsMain extends App {
-  val service = new UserService()
-
-  val fails = service.findUser("fails")
+  val fails = findUser("fails")
   println(s"fails: ${fails}")
 
-  val notFound = service.findUser("notfound")
+  val notFound = findUser("notfound")
   println(s"notFound: ${notFound}")
 
-  val reachable = service.findUser("reachable")
+  val reachable = findUser("reachable")
   println(s"reachable: ${reachable}")
 }
