@@ -1,14 +1,30 @@
 package com.github.kkrull.cats
 
-import cats.implicits.catsSyntaxOptionId
+import cats.syntax.all._
+
+import scala.concurrent.Future
+
+case class User(id: Int, name: String)
+
+class UserService {
+  def findUser(name: String): Future[Option[User]] = {
+    name match {
+      case "fails" => Future.failed(new RuntimeException(s"failed to look up user: ${name}"))
+      case "notfound" => Future.successful(None)
+      case "reachable" => Future.successful(Some(User(1, "reachable")))
+    }
+  }
+}
 
 object CatsMain extends App {
-  println(s"Hello world!")
+  val service = new UserService()
 
-  val answer = 42
-  val scalaOption = Some(answer)
-  println(s"scalaOption: ${scalaOption}")
+  val fails = service.findUser("fails")
+  println(s"fails: ${fails}")
 
-  val catsOption = answer.some
-  println(s"catsOption: ${catsOption}")
+  val notFound = service.findUser("notfound")
+  println(s"notFound: ${notFound}")
+
+  val reachable = service.findUser("reachable")
+  println(s"reachable: ${reachable}")
 }
