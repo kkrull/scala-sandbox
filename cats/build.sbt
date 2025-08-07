@@ -6,6 +6,6 @@ lazy val catsHello = project
   .settings(
     name := "catshello",
     libraryDependencies ++= Seq(
-      "org.typelevel" %% "cats-core" % "2.12.0"
+      "org.typelevel" %% "cats-core" % "2.13.0"
     )
   )
