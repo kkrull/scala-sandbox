@@ -32,15 +32,22 @@ object CatsMain extends App {
     })
   }
 
+  def processUsers(a: Option[User], b: Option[User]): Seq[Int] = {
+    for {
+      user <- Seq(a, b)
+    } yield processUser(user)
+  }
+
   def processUser(user: Option[User]): Int = {
     println(s"Processing user: ${user}")
     user.map(_.id).getOrElse(0)
   }
 
-  val idBitmask: Future[Int] = for {
-    notFoundResult <- findUser("notfound")
-  } yield processUser(notFoundResult)
+  def userIds: Future[Seq[Int]] = for {
+    reachable <- findUser("reachable")
+    notFound <- findUser("notFound")
+  } yield processUsers(reachable, notFound)
 
-  val result = Await.result(idBitmask, timeout)
-  println(s"Processed users bitmask: ${paddedBitmask(result, 3)}")
+  val results = Await.result(userIds, timeout)
+  println(s"Processed users bitmask: ${paddedBitmask(results.sum, 3)}")
 }
