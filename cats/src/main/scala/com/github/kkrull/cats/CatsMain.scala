@@ -30,8 +30,8 @@ object CatsMain extends App {
   println(s"result of fails: ${Await.result(fails, timeout)}")
 
   val notFound = findUser("notfound")
-  println(s"result of notFound: ${notFound}")
+  println(s"result of notFound: ${Await.result(notFound, timeout)}")
 
   val reachable = findUser("reachable")
-  println(s"result of reachable: ${reachable}")
+  println(s"result of reachable: ${Await.result(reachable, timeout)}")
 }
