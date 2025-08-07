@@ -12,6 +12,13 @@ object CatsMain extends App {
   implicit val ec: ExecutionContext = ExecutionContext.global
   val timeout: Duration = Duration.create(1, TimeUnit.SECONDS)
 
+  def paddedBitmask(mask: Int, numChars: Int): String =
+    mask.toBinaryString
+      .reverse
+      .padTo(numChars, "0")
+      .reverse
+      .mkString
+
   def findUser(name: String)(implicit ec: ExecutionContext): Future[Option[User]] = {
     Future({
       println(s"[findUser] lookup '${name}'")
@@ -25,13 +32,15 @@ object CatsMain extends App {
     })
   }
 
+  def processUser(user: Option[User]): Int = {
+    println(s"Processing user: ${user}")
+    user.map(_.id).getOrElse(0)
+  }
 
-  val fails = findUser("fails")
-  println(s"result of fails: ${Await.ready(fails, timeout)}")
+  val idBitmask: Future[Int] = for {
+    notFoundResult <- findUser("notfound")
+  } yield processUser(notFoundResult)
 
-  val notFound = findUser("notfound")
-  println(s"result of notFound: ${Await.ready(notFound, timeout)}")
-
-  val reachable = findUser("reachable")
-  println(s"result of reachable: ${Await.ready(reachable, timeout)}")
+  val result = Await.result(idBitmask, timeout)
+  println(s"Processed users bitmask: ${paddedBitmask(result, 3)}")
 }
