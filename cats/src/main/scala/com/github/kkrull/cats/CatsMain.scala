@@ -1,6 +1,6 @@
 package com.github.kkrull.cats
 
-import cats.syntax.all._
+import cats.implicits.{catsSyntaxOptionId, none}
 
 import java.util.concurrent.TimeUnit
 import scala.concurrent.duration.Duration
@@ -18,9 +18,9 @@ object CatsMain extends App {
       name match {
         case "fails" =>
           throw new RuntimeException(s"failed to look up user: ${name}")
-        case "notfound" => Option.empty[User]
-        case "reachable" => Some(User(1, "reachable"))
-        case _ => Option.empty[User]
+        case "notfound" => none[User]
+        case "reachable" => User(1, "reachable").some
+        case _ => none[User]
       }
     })
   }
