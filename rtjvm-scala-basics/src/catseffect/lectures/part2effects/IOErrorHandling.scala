@@ -55,7 +55,7 @@ object IOErrorHandling {
     IO.fromEither(anEither)
 
   // 2 - handleError, with (using APIs we have seen so far)
-  
+
   def handleIOError[A](io: IO[A])(handler: Throwable => A): IO[A] =
     io.redeem(handler, identity)
 
