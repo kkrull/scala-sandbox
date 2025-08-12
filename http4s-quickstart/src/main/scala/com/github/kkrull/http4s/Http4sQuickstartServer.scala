@@ -11,15 +11,16 @@ import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.implicits._
 import org.http4s.server.middleware.Logger
 
-object Http4sQuickstartServer {
-  def run[F[_]: Async: Network]: F[Nothing] = {
+class Http4sQuickstartServer[F[_]: Async: Network] {
+  private val helloWorldService = HelloWorldService.impl[F]
+
+  def run: F[Nothing] = {
     for {
       client <- EmberClientBuilder.default[F].build
-      helloWorldAlg = HelloWorldService.impl[F]
       jokeAlg = Jokes.impl[F](client)
 
       routerAsHttpApp = (
-        HelloRoutes.make[F](helloWorldAlg)
+        HelloRoutes.make[F](helloWorldService)
           <+> JokeRoutes.make[F](jokeAlg)
       ).orNotFound
 
@@ -34,4 +35,5 @@ object Http4sQuickstartServer {
           .build
     } yield ()
   }.useForever
+
 }
