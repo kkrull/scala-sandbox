@@ -31,7 +31,6 @@ lazy val root = (project in file("."))
 //        Dependencies.logback,
 //        Dependencies.logbackLogstashEncoder,
 //        Dependencies.mssqlServerJDBC,
-        Dependencies.munit % Test,
 //        Dependencies.playJson,
 //        Dependencies.pureConfig,
         Dependencies.scalaMock % Test,

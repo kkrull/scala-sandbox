@@ -5,8 +5,6 @@ object Dependencies {
   val http4sDsl = "org.http4s" %% "http4s-dsl" % http4s.revision
   val http4sEmberServer = "org.http4s" %% "http4s-ember-server" % http4s.revision
 
-  lazy val munit = "org.scalameta" %% "munit" % "0.7.29"
-
   val scalaMock = "org.scalamock" %% "scalamock" % "7.4.0"
   val scalaTest = "org.scalatest" %% "scalatest" % "3.2.19"
 
