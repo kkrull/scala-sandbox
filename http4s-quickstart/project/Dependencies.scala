@@ -1,6 +1,6 @@
 import sbt.*
 
-object TemplateDependencies {
+object Dependencies {
   val circeGeneric = "io.circe" %% "circe-generic" % "0.14.14"
 
   val http4s = "org.http4s" %% "http4s-core" % "0.23.30"
@@ -12,9 +12,12 @@ object TemplateDependencies {
   val logbackClassic = "ch.qos.logback" % "logback-classic" % "1.5.18"
   val mUnit = "org.scalameta" %% "munit" % "1.1.1"
   val mUnitCatsEffect = "org.typelevel" %% "munit-cats-effect" % "2.1.0"
+
+  val scalaMock = "org.scalamock" %% "scalamock" % "7.4.0"
+  val scalaTest = "org.scalatest" %% "scalatest" % "3.2.19"
 }
 
-object Dependencies {
+object ReferenceDependencies {
   val catsEffect = "org.typelevel" %% "cats-effect" % "3.6.3"
   val catsRetry = "com.github.cb372" %% "cats-retry" % "3.1.3"
 
