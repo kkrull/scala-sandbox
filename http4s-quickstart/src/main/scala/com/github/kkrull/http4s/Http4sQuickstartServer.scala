@@ -20,20 +20,19 @@ object Http4sQuickstartServer {
       // Can also be done via a Router if you
       // want to extract segments not checked
       // in the underlying routes.
-      httpApp = (
+      routerAsHttpApp = (
         Http4sQuickstartRoutes.helloWorldRoutes[F](helloWorldAlg) <+>
           Http4sQuickstartRoutes.jokeRoutes[F](jokeAlg)
       ).orNotFound
 
-      // With Middlewares in place
-      finalHttpApp = Logger.httpApp(true, true)(httpApp)
+      httpAppWithMiddleware = Logger.httpApp(true, true)(routerAsHttpApp)
 
       _ <-
         EmberServerBuilder
           .default[F]
           .withHost(ipv4"0.0.0.0")
           .withPort(port"8080")
-          .withHttpApp(finalHttpApp)
+          .withHttpApp(httpAppWithMiddleware)
           .build
     } yield ()
   }.useForever
