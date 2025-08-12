@@ -2,6 +2,7 @@ package catseffect.lectures.part2effects
 
 import cats.Traverse
 import cats.effect.{IO, IOApp}
+import cats.implicits.toTraverseOps
 import utils._
 
 import scala.concurrent.Future
@@ -39,6 +40,17 @@ object IOTraversal extends IOApp.Simple {
   val ios: List[IO[Int]] = workLoad.map(computeAsIO)
   val singleIO: IO[List[Int]] = listTraverse.traverse(workLoad)(computeAsIO)
 
+  import cats.syntax.parallel._
+  val parallelSingleIO: IO[List[Int]] = workLoad.parTraverse(computeAsIO)
+
+  /* Exercises */
+
+  def sequence[A](listOfIOs: List[IO[A]]): IO[List[A]] =
+    listOfIOs.traverse(identity)
+
+  def sequence_v2[F[_]: Traverse, A](containerOfIOs: F[IO[A]]): IO[F[A]] =
+    containerOfIOs.traverse(identity)
+
   override def run: IO[Unit] =
-    singleIO.map(_.sum).debug.void
+    parallelSingleIO.map(_.sum).debug.void
 }
