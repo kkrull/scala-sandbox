@@ -6,7 +6,7 @@ import org.http4s.HttpRoutes
 import org.http4s.dsl.Http4sDsl
 
 object HelloRoutes {
-  def helloWorldRoutes[F[_]: Sync](H: HelloWorldService[F]): HttpRoutes[F] = {
+  def make[F[_]: Sync](H: HelloWorldService[F]): HttpRoutes[F] = {
     val dsl = new Http4sDsl[F] {}
 
     import dsl._

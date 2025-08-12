@@ -19,8 +19,8 @@ object Http4sQuickstartServer {
       jokeAlg = Jokes.impl[F](client)
 
       routerAsHttpApp = (
-        HelloRoutes.helloWorldRoutes[F](helloWorldAlg)
-          <+> JokeRoutes.jokeRoutes[F](jokeAlg)
+        HelloRoutes.make[F](helloWorldAlg)
+          <+> JokeRoutes.make[F](jokeAlg)
       ).orNotFound
 
       httpAppWithMiddleware = Logger.httpApp(true, true)(routerAsHttpApp)
