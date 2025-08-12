@@ -1,4 +1,4 @@
-package example
+package com.github.kkrull.greet
 
 object Hello extends Greeting with App {
   println(greeting)

@@ -1,4 +1,4 @@
-package example
+package com.github.kkrull.greet
 
 import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.matchers.should.Matchers
