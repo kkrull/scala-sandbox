@@ -8,8 +8,7 @@ import org.scalatest.freespec.AsyncFreeSpec
 import org.scalatest.matchers.should.Matchers
 
 class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
-  val retHelloWorld: IO[Response[IO]] = {
-    val name = "world"
+  def retHelloWorld(name: String = "world"): IO[Response[IO]] = {
     val getHello = Request[IO](Method.GET, uri"/hello".addSegment(name))
     val helloWorld = HelloWorldService.impl[IO]
     HelloRoutes
@@ -18,12 +17,18 @@ class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
   }
 
   "HelloWorld" - {
-    "returns status code 200" in {
-      retHelloWorld.map(_.status).asserting(_ shouldBe Status.Ok)
-    }
+    "GET /hello/:name" - {
+      "responds 200 OK" in {
+        retHelloWorld()
+          .map(_.status)
+          .asserting(_ shouldBe Status.Ok)
+      }
 
-    "returns a greeting" in {
-      retHelloWorld.flatMap(_.as[String]).asserting(_ shouldEqual "{\"message\":\"Hello world\"}")
+      "responds with a greeting object for the given name" in {
+        retHelloWorld(name = "world")
+          .flatMap(_.as[String])
+          .asserting(_ shouldEqual "{\"message\":\"Hello world\"}")
+      }
     }
   }
 }
