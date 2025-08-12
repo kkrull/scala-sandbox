@@ -2,7 +2,9 @@ package com.github.kkrull.http4s.greet
 
 import cats.effect._
 import cats.effect.testing.scalatest.AsyncIOSpec
+import io.circe.Json
 import org.http4s._
+import org.http4s.circe._
 import org.http4s.implicits._
 import org.scalatest.freespec.AsyncFreeSpec
 import org.scalatest.matchers.should.Matchers
@@ -20,10 +22,15 @@ class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
           .asserting(_ shouldBe Status.Ok)
       }
 
-      "responds with a greeting object for the given name" in {
+      "responds with a greeting for the given name" in {
         doRequest(helloRequest(name = "world"))
-          .flatMap(_.as[String])
-          .asserting(_ shouldEqual "{\"message\":\"Hello world\"}")
+          .flatMap(_.as[Json])
+          .map(_ \\ "message")
+          .asserting {
+            case List(first) =>
+              first.asString.get shouldEqual "Hello world"
+            case x @ _ => fail(s"invalid match: $x")
+          }
       }
     }
 
