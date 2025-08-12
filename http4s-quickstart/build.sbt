@@ -1,9 +1,14 @@
 lazy val root = (project in file("."))
   .settings(
-    organization := "com.github.kkrull",
+    assembly / assemblyMergeStrategy := {
+      case "module-info.class" => MergeStrategy.discard
+      case x                   => (assembly / assemblyMergeStrategy).value.apply(x)
+    },
+    fork := true,
     name := "http4s-quickstart",
-    version := "0.0.1-SNAPSHOT",
+    organization := "com.github.kkrull",
     scalaVersion := "2.13.16",
+    version := "0.0.1-SNAPSHOT",
     libraryDependencies ++= Seq(
       TemplateDependencies.http4sEmberServer,
       TemplateDependencies.http4sEmberClient,
@@ -16,9 +21,4 @@ lazy val root = (project in file("."))
     ),
     addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.3" cross CrossVersion.full),
     addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1"),
-    assembly / assemblyMergeStrategy := {
-      case "module-info.class" => MergeStrategy.discard
-      case x                   => (assembly / assemblyMergeStrategy).value.apply(x)
-    },
-    fork := true,
   )
