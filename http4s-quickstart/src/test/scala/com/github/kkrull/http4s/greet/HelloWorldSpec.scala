@@ -1,4 +1,4 @@
-package com.github.kkrull.http4s
+package com.github.kkrull.http4s.greet
 
 import cats.effect._
 import cats.effect.testing.scalatest.AsyncIOSpec
@@ -11,7 +11,7 @@ class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
   val retHelloWorld: IO[Response[IO]] = {
     val getHello = Request[IO](Method.GET, uri"/hello/world")
     val helloWorld = HelloWorld.impl[IO]
-    Http4sQuickstartRoutes
+    HelloRoutes
       .helloWorldRoutes(helloWorld)
       .orNotFound(getHello)
   }

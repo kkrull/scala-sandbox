@@ -1,11 +1,12 @@
-package com.github.kkrull.http4s
+package com.github.kkrull.http4s.greet
 
 import cats.effect.Sync
 import cats.implicits._
+import com.github.kkrull.http4s.joke.Jokes
 import org.http4s.HttpRoutes
 import org.http4s.dsl.Http4sDsl
 
-object Http4sQuickstartRoutes {
+object HelloRoutes {
   def helloWorldRoutes[F[_]: Sync](H: HelloWorld[F]): HttpRoutes[F] = {
     val dsl = new Http4sDsl[F] {}
 

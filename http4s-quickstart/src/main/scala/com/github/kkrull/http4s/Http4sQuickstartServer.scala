@@ -3,6 +3,8 @@ package com.github.kkrull.http4s
 import cats.effect.Async
 import cats.syntax.all._
 import com.comcast.ip4s._
+import com.github.kkrull.http4s.greet.{HelloRoutes, HelloWorld}
+import com.github.kkrull.http4s.joke.Jokes
 import fs2.io.net.Network
 import org.http4s.ember.client.EmberClientBuilder
 import org.http4s.ember.server.EmberServerBuilder
@@ -16,13 +18,9 @@ object Http4sQuickstartServer {
       helloWorldAlg = HelloWorld.impl[F]
       jokeAlg = Jokes.impl[F](client)
 
-      // Combine Service Routes into an HttpApp.
-      // Can also be done via a Router if you
-      // want to extract segments not checked
-      // in the underlying routes.
       routerAsHttpApp = (
-        Http4sQuickstartRoutes.helloWorldRoutes[F](helloWorldAlg) <+>
-          Http4sQuickstartRoutes.jokeRoutes[F](jokeAlg)
+        HelloRoutes.helloWorldRoutes[F](helloWorldAlg)
+          <+> HelloRoutes.jokeRoutes[F](jokeAlg)
       ).orNotFound
 
       httpAppWithMiddleware = Logger.httpApp(true, true)(routerAsHttpApp)

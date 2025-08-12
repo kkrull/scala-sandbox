@@ -1,4 +1,4 @@
-package com.github.kkrull.http4s
+package com.github.kkrull.http4s.greet
 
 import cats.Applicative
 import cats.implicits._

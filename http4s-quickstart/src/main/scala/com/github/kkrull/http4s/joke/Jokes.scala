@@ -1,4 +1,4 @@
-package com.github.kkrull.http4s
+package com.github.kkrull.http4s.joke
 
 import cats.effect.Concurrent
 import cats.implicits._
