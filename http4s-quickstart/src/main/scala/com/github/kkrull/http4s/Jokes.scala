@@ -22,9 +22,9 @@ object Jokes {
 
   object Joke {
     implicit val jokeDecoder: Decoder[Joke] = deriveDecoder[Joke]
-    implicit def jokeEntityDecoder[F[_]: Concurrent]: EntityDecoder[F, Joke] =      jsonOf
+    implicit def jokeEntityDecoder[F[_]: Concurrent]: EntityDecoder[F, Joke] = jsonOf
     implicit val jokeEncoder: Encoder[Joke] = deriveEncoder[Joke]
-    implicit def jokeEntityEncoder[F[_]]: EntityEncoder[F, Joke] =      jsonEncoderOf
+    implicit def jokeEntityEncoder[F[_]]: EntityEncoder[F, Joke] = jsonEncoderOf
   }
 
   final case class JokeError(e: Throwable) extends RuntimeException
