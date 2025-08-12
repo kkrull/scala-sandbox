@@ -17,11 +17,11 @@ class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
   }
 
   "HelloWorld" - {
-    "returns status code 200" - {
+    "returns status code 200" in {
       retHelloWorld.map(_.status).asserting(_ shouldBe Status.Ok)
     }
 
-    "returns a greeting" - {
+    "returns a greeting" in {
       retHelloWorld.flatMap(_.as[String]).asserting(_ shouldEqual "{\"message\":\"Hello, world\"}")
     }
   }
