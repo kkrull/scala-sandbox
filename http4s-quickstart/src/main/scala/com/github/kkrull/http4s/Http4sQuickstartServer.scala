@@ -4,7 +4,7 @@ import cats.effect.Async
 import cats.syntax.all._
 import com.comcast.ip4s._
 import com.github.kkrull.http4s.greet.{HelloRoutes, HelloWorld}
-import com.github.kkrull.http4s.joke.Jokes
+import com.github.kkrull.http4s.joke.{JokeRoutes, Jokes}
 import fs2.io.net.Network
 import org.http4s.ember.client.EmberClientBuilder
 import org.http4s.ember.server.EmberServerBuilder
@@ -20,7 +20,7 @@ object Http4sQuickstartServer {
 
       routerAsHttpApp = (
         HelloRoutes.helloWorldRoutes[F](helloWorldAlg)
-          <+> HelloRoutes.jokeRoutes[F](jokeAlg)
+          <+> JokeRoutes.jokeRoutes[F](jokeAlg)
       ).orNotFound
 
       httpAppWithMiddleware = Logger.httpApp(true, true)(routerAsHttpApp)
