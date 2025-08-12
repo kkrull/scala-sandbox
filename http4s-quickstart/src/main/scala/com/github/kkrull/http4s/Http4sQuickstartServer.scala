@@ -9,8 +9,7 @@ import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.implicits._
 import org.http4s.server.middleware.Logger
 
-object Http4squickstartServer {
-
+object Http4sQuickstartServer {
   def run[F[_]: Async: Network]: F[Nothing] = {
     for {
       client <- EmberClientBuilder.default[F].build
@@ -22,8 +21,8 @@ object Http4squickstartServer {
       // want to extract segments not checked
       // in the underlying routes.
       httpApp = (
-        Http4squickstartRoutes.helloWorldRoutes[F](helloWorldAlg) <+>
-          Http4squickstartRoutes.jokeRoutes[F](jokeAlg)
+        Http4sQuickstartRoutes.helloWorldRoutes[F](helloWorldAlg) <+>
+          Http4sQuickstartRoutes.jokeRoutes[F](jokeAlg)
       ).orNotFound
 
       // With Middlewares in place
