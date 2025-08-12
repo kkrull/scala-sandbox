@@ -3,7 +3,7 @@ package com.github.kkrull.http4s
 import cats.effect.Async
 import cats.syntax.all._
 import com.comcast.ip4s._
-import com.github.kkrull.http4s.greet.{HelloRoutes, HelloWorld}
+import com.github.kkrull.http4s.greet.{HelloRoutes, HelloWorldService}
 import com.github.kkrull.http4s.joke.{JokeRoutes, Jokes}
 import fs2.io.net.Network
 import org.http4s.ember.client.EmberClientBuilder
@@ -15,7 +15,7 @@ object Http4sQuickstartServer {
   def run[F[_]: Async: Network]: F[Nothing] = {
     for {
       client <- EmberClientBuilder.default[F].build
-      helloWorldAlg = HelloWorld.impl[F]
+      helloWorldAlg = HelloWorldService.impl[F]
       jokeAlg = Jokes.impl[F](client)
 
       routerAsHttpApp = (

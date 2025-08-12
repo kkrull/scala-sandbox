@@ -10,7 +10,7 @@ import org.scalatest.matchers.should.Matchers
 class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
   val retHelloWorld: IO[Response[IO]] = {
     val getHello = Request[IO](Method.GET, uri"/hello/world")
-    val helloWorld = HelloWorld.impl[IO]
+    val helloWorld = HelloWorldService.impl[IO]
     HelloRoutes
       .helloWorldRoutes(helloWorld)
       .orNotFound(getHello)
@@ -22,7 +22,7 @@ class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
     }
 
     "returns a greeting" in {
-      retHelloWorld.flatMap(_.as[String]).asserting(_ shouldEqual "{\"message\":\"Hello, world\"}")
+      retHelloWorld.flatMap(_.as[String]).asserting(_ shouldEqual "{\"message\":\"Hello world\"}")
     }
   }
 }
