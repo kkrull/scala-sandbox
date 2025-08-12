@@ -16,22 +16,23 @@ class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
       .orNotFound
 
     "GET /hello/:name" - {
-      "responds 200 OK" in {
+      "responds 200 OK" in
         doRequest(helloRequest())
           .map(_.status)
           .asserting(_ shouldBe Status.Ok)
-      }
 
-      "responds with a greeting for the given name" in {
+      "responds with a greeting for the given name" in
         doRequest(helloRequest(name = "world"))
           .flatMap(_.as[Json])
           .map(_ \\ "message")
+          .map(_.head)
+          .map(_.asString)
           .asserting {
-            case List(first) =>
-              first.asString.get shouldEqual "Hello world"
-            case x @ _ => fail(s"invalid match: $x")
+            case Some(first) =>
+              first shouldEqual "Hello world"
+            case x @ _ =>
+              fail(s"invalid match: $x")
           }
-      }
     }
 
     def doRequest(request: Request[IO]): IO[Response[IO]] =
@@ -39,7 +40,7 @@ class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
 
     def helloRequest(name: String = "world"): Request[IO] = Request[IO](
       Method.GET,
-      uri"/hello".addSegment(name)
+      uri"/hello".addSegment(name),
     )
   }
 }
