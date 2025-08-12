@@ -1,15 +1,15 @@
+import org.typelevel.scalacoptions.ScalacOptions
+
 lazy val root = (project in file("."))
   .settings(
+    addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1"),
+    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.3" cross CrossVersion.full),
     assembly / assemblyMergeStrategy := {
       case "module-info.class" => MergeStrategy.discard
       case x                   =>
         (assembly / assemblyMergeStrategy).value.apply(x)
     },
     fork := true,
-    name := "http4s-quickstart",
-    organization := "com.github.kkrull",
-    scalaVersion := "2.13.16",
-    version := "0.0.1-SNAPSHOT",
     libraryDependencies ++= Seq(
       Dependencies.catsEffectTesting % Test,
       Dependencies.circeGeneric,
@@ -21,6 +21,9 @@ lazy val root = (project in file("."))
       Dependencies.scalaMock % Test,
       Dependencies.scalaTest % Test,
     ),
-    addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1"),
-    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.3" cross CrossVersion.full),
+    name := "http4s-quickstart",
+    organization := "com.github.kkrull",
+    scalaVersion := "2.13.16",
+    Test / tpolecatExcludeOptions += ScalacOptions.warnNonUnitStatement,
+    version := "0.0.1-SNAPSHOT",
   )
