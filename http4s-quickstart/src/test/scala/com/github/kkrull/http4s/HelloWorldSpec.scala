@@ -8,7 +8,7 @@ import org.scalatest.freespec.AsyncFreeSpec
 import org.scalatest.matchers.should.Matchers
 
 class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
-  private[this] val retHelloWorld: IO[Response[IO]] = {
+  val retHelloWorld: IO[Response[IO]] = {
     val getHello = Request[IO](Method.GET, uri"/hello/world")
     val helloWorld = HelloWorld.impl[IO]
     Http4sQuickstartRoutes

@@ -24,6 +24,8 @@ lazy val root = (project in file("."))
     name := "http4s-quickstart",
     organization := "com.github.kkrull",
     scalaVersion := "2.13.16",
+    // Disable Wnonunit-statement warnings related to ScalaTest Assertion.
+    Test / scalacOptions += "-Wconf:cat=other-pure-statement&msg=org.scalatest.Assertion:s",
     Test / tpolecatExcludeOptions += ScalacOptions.warnNonUnitStatement,
     version := "0.0.1-SNAPSHOT",
   )
