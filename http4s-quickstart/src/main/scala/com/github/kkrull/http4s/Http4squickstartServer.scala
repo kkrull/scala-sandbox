@@ -23,14 +23,15 @@ object Http4squickstartServer {
       // in the underlying routes.
       httpApp = (
         Http4squickstartRoutes.helloWorldRoutes[F](helloWorldAlg) <+>
-        Http4squickstartRoutes.jokeRoutes[F](jokeAlg)
+          Http4squickstartRoutes.jokeRoutes[F](jokeAlg)
       ).orNotFound
 
       // With Middlewares in place
       finalHttpApp = Logger.httpApp(true, true)(httpApp)
 
-      _ <- 
-        EmberServerBuilder.default[F]
+      _ <-
+        EmberServerBuilder
+          .default[F]
           .withHost(ipv4"0.0.0.0")
           .withPort(port"8080")
           .withHttpApp(finalHttpApp)
