@@ -9,7 +9,8 @@ import org.scalatest.matchers.should.Matchers
 
 class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
   val retHelloWorld: IO[Response[IO]] = {
-    val getHello = Request[IO](Method.GET, uri"/hello/world")
+    val name = "world"
+    val getHello = Request[IO](Method.GET, uri"/hello".addSegment(name))
     val helloWorld = HelloWorldService.impl[IO]
     HelloRoutes
       .helloWorldRoutes(helloWorld)
