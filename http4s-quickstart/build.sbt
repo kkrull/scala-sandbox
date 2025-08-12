@@ -2,8 +2,8 @@ import org.typelevel.scalacoptions.ScalacOptions
 
 lazy val root = (project in file("."))
   .settings(
-    addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1"),
-    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.3" cross CrossVersion.full),
+    addCompilerPlugin(CompilerPlugins.betterMonadicFor),
+    addCompilerPlugin(CompilerPlugins.kindProjector),
     assembly / assemblyMergeStrategy := {
       case "module-info.class" => MergeStrategy.discard
       case x                   =>

@@ -1,5 +1,10 @@
 import sbt.*
 
+object CompilerPlugins {
+  val betterMonadicFor = "com.olegpy" %% "better-monadic-for" % "0.3.1"
+  val kindProjector = "org.typelevel" %% "kind-projector" % "0.13.3" cross CrossVersion.full
+}
+
 object Dependencies {
   val catsEffectTesting = "org.typelevel" %% "cats-effect-testing-scalatest" % "1.6.0"
   val circeGeneric = "io.circe" %% "circe-generic" % "0.14.14"
