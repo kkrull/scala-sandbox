@@ -13,7 +13,7 @@ object Dependencies {
   val mUnit = "org.scalameta" %% "munit" % "1.1.1"
   val mUnitCatsEffect = "org.typelevel" %% "munit-cats-effect" % "2.1.0"
 
-  val scalaMock = "org.scalamock" %% "scalamock" % "7.4.0"
+  val scalaMock = "org.scalamock" %% "scalamock" % "7.4.1"
   val scalaTest = "org.scalatest" %% "scalatest" % "3.2.19"
 }
 

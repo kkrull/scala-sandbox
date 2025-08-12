@@ -2,7 +2,8 @@ lazy val root = (project in file("."))
   .settings(
     assembly / assemblyMergeStrategy := {
       case "module-info.class" => MergeStrategy.discard
-      case x                   => (assembly / assemblyMergeStrategy).value.apply(x)
+      case x                   =>
+        (assembly / assemblyMergeStrategy).value.apply(x)
     },
     fork := true,
     name := "http4s-quickstart",
@@ -18,6 +19,8 @@ lazy val root = (project in file("."))
       Dependencies.logbackClassic % Runtime,
       Dependencies.mUnit % Test,
       Dependencies.mUnitCatsEffect % Test,
+      Dependencies.scalaMock % Test,
+      Dependencies.scalaTest % Test,
     ),
     addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1"),
     addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.3" cross CrossVersion.full),
