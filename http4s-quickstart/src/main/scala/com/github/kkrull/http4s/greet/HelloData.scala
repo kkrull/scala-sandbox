@@ -2,18 +2,16 @@ package com.github.kkrull.http4s.greet
 
 import cats.Applicative
 import cats.data.EitherT
-import cats.implicits._
 import io.circe.{Encoder, Json}
 import org.http4s.EntityEncoder
 import org.http4s.circe._
 
 object Name {
-  def fromString[F[_]: Applicative](nameData: String): EitherT[F, Throwable, Name] = {
-    val maybeName =
-      if (nameData.isEmpty) Either.left[Throwable, Name](new IllegalArgumentException(s"Invalid name: $nameData"))
-      else Right(Name(nameData))
-    maybeName.toEitherT[F]
-  }
+  def fromString[F[_]: Applicative](nameData: String): EitherT[F, IllegalArgumentException, Name] =
+    if (nameData.isEmpty)
+      EitherT.leftT(new IllegalArgumentException(s"Invalid name: $nameData"))
+    else
+      EitherT.rightT(Name(nameData))
 }
 
 final case class Name private (value: String) extends AnyVal
