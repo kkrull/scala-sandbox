@@ -9,7 +9,7 @@ trait HelloWorldService[F[_]] {
 
 object HelloWorldService {
   def impl[F[_]: Applicative]: HelloWorldService[F] = new HelloWorldService[F] {
-    def greet(n: Name): F[Greeting] =
-      Greeting(s"Hello ${n.name}").pure[F]
+    def greet(name: Name): F[Greeting] =
+      Greeting(s"Hello ${name.value}").pure[F]
   }
 }
