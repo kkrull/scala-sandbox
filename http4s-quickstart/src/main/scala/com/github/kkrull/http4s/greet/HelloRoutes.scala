@@ -11,10 +11,8 @@ object HelloRoutes {
 
     import dsl._
     HttpRoutes.of[F] { case GET -> Root / "hello" / name =>
-      for {
-        greeting <- service.greet(Name(name))
-        response <- Ok(greeting)
-      } yield response
+      service.greet(Name(name))
+        .flatMap(Ok(_))
     }
   }
 }
