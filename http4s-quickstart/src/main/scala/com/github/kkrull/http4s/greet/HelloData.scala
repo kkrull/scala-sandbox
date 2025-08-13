@@ -4,7 +4,15 @@ import io.circe.{Encoder, Json}
 import org.http4s.EntityEncoder
 import org.http4s.circe._
 
-final case class Name(value: String) extends AnyVal
+object Name {
+  def fromString(name: String): Either[String, Name] =
+    Option(name)
+      .filter(_.nonEmpty)
+      .map(Name(_))
+      .toRight(s"Invalid name: `$name`")
+}
+
+final case class Name private (value: String) extends AnyVal
 
 final case class Greeting(message: String) extends AnyVal
 

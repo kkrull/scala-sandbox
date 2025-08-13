@@ -1,7 +1,6 @@
 package com.github.kkrull.http4s.greet
 
 import cats.effect.Sync
-import cats.implicits._
 import org.http4s.HttpRoutes
 import org.http4s.dsl.Http4sDsl
 
@@ -11,9 +10,12 @@ object HelloRoutes {
 
     import dsl._
     HttpRoutes.of[F] { case GET -> Root / "hello" / name =>
-      service
-        .greet(Name(name))
-        .flatMap(Ok(_))
+      Name.fromString(name)
+        .map(service.greet)
+        .fold(
+          error => BadRequest(error),
+          greeting => Ok(greeting),
+        )
     }
   }
 }
