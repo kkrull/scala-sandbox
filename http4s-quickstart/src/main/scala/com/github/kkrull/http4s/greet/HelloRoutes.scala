@@ -12,13 +12,11 @@ object HelloRoutes {
     import dsl._
     HttpRoutes.of[F] { case GET -> Root / "hello" / nameInput =>
       Name.fromString(nameInput) match {
-        case Left(validationError) => BadRequest(validationError)
-        case Right(name: Name)     =>
+        case Left(nameError) => BadRequest(nameError)
+        case Right(name) =>
           service.greet(name).flatMap {
-            case Left(serviceError: Throwable) =>
-              InternalServerError(s"Server error: ${serviceError.getMessage}")
-            case Right(greeting: Greeting) =>
-              Ok(greeting)
+            case Left(error) => InternalServerError(s"Server error: ${error.getMessage}")
+            case Right(greeting) => Ok(greeting)
           }
       }
     }
