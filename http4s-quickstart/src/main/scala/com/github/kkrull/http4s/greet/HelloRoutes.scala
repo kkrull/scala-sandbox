@@ -13,14 +13,14 @@ object HelloRoutes {
     import dsl._
     HttpRoutes.of[F] { case GET -> Root / "hello" / nameInput =>
       val maybeGreeting = for {
-        name <- Name.fromString(nameInput) //EitherT[F, Throwable, Name]
-        greeting <- service.greet(name) //EitherT[F, Throwable, Greeting]
+        name <- Name.fromString(nameInput)
+        greeting <- service.greet(name)
       } yield Ok(greeting)
 
-      val response: EitherT[F, Throwable, F[Response[F]]] = maybeGreeting.recover {
+      val response: EitherT[F, Exception, F[Response[F]]] = maybeGreeting.recover {
         case nameError: IllegalArgumentException =>
           BadRequest(nameError.getMessage)
-        case serviceError: Throwable =>
+        case serviceError: Exception =>
           InternalServerError(serviceError.getMessage)
       }
 

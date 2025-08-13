@@ -7,7 +7,7 @@ import org.http4s.EntityEncoder
 import org.http4s.circe._
 
 object Name {
-  def fromString[F[_]: Applicative](nameData: String): EitherT[F, IllegalArgumentException, Name] =
+  def fromString[F[_]: Applicative](nameData: String): EitherT[F, Exception, Name] =
     if (nameData.isEmpty)
       EitherT.leftT(new IllegalArgumentException(s"Invalid name: $nameData"))
     else
