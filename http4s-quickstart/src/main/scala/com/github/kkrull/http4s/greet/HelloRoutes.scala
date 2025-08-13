@@ -11,7 +11,8 @@ object HelloRoutes {
 
     import dsl._
     HttpRoutes.of[F] { case GET -> Root / "hello" / name =>
-      service.greet(Name(name))
+      service
+        .greet(Name(name))
         .flatMap(Ok(_))
     }
   }
