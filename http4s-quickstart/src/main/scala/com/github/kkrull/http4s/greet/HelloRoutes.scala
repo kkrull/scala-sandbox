@@ -23,21 +23,20 @@ object HelloRoutes {
     val dsl = new Http4sDsl[F] {}
     import dsl._
 
-    val greeting = for {
+    def handleError: PartialFunction[Exception, F[Response[F]]] = {
+      case nameError: IllegalArgumentException =>
+        BadRequest(nameError.getMessage)
+      case serverError: Exception =>
+        InternalServerError(s"Server error: ${serverError.getMessage}")
+    }
+
+    (for {
       name <- EitherT.fromEither(Name.fromString(nameInput))
       greeting <- service.greetT(name)
-    } yield greeting
-
-    greeting.foldF(
-      {
-        case nameError: IllegalArgumentException =>
-          BadRequest(nameError.getMessage)
-        case serverError: Exception =>
-          InternalServerError(s"Server error: ${serverError.getMessage}")
-      },
-      greeting => Ok(greeting),
+      response <- EitherT.rightT[F, Exception](Ok(greeting))
+    } yield response).foldF(
+      handleError,
+      identity,
     )
   }
-
-  private def handleError[F[_]](response: EitherT[F, Exception, F[Response[F]]]): F[Response[F]] = ???
 }
