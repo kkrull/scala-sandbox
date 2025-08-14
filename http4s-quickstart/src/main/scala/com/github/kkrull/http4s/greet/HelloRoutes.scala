@@ -31,7 +31,7 @@ object HelloRoutes {
 
   def makeAE[F[_]](
     service: HelloWorldService[F],
-  )(implicit ae: ApplicativeError[F, Exception] with Sync[F]): HttpRoutes[F] = {
+  )(implicit FAE: ApplicativeError[F, Exception] with Sync[F]): HttpRoutes[F] = {
     val dsl = new Http4sDsl[F] {}
 
     import dsl._
@@ -41,8 +41,7 @@ object HelloRoutes {
         .flatMap(name => service.greetAE(name))
         .flatMap(greeting => Ok(greeting))
 
-      val typeClass: ApplicativeError[F, Exception] = ae
-      typeClass.handleErrorWith(maybeGreeting) {
+      FAE.recoverWith(maybeGreeting) {
         case nameError: IllegalArgumentException =>
           BadRequest(nameError.getMessage)
         case serviceError: Exception =>
