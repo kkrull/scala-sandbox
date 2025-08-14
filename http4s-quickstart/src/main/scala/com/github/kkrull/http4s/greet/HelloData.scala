@@ -7,20 +7,19 @@ import org.http4s.EntityEncoder
 import org.http4s.circe._
 
 object Name {
-  def fromString[F[_]: Applicative](nameData: String): EitherT[F, Exception, Name] =
-    if (nameData.isEmpty)
-      EitherT.leftT(new IllegalArgumentException(s"Invalid name: $nameData"))
-    else
-      EitherT.rightT(Name(nameData))
-
   def fromStringAE[F[_]](
     nameData: String,
-  )(implicit ae: ApplicativeError[F, Exception]): F[Name] = {
+  )(implicit ae: ApplicativeError[F, Exception]): F[Name] =
     if (nameData.isEmpty)
       ae.raiseError(new IllegalArgumentException(s"Invalid name: $nameData"))
     else
       ae.pure(Name(nameData))
-  }
+
+  def fromStringT[F[_]: Applicative](nameData: String): EitherT[F, Exception, Name] =
+    if (nameData.isEmpty)
+      EitherT.leftT(new IllegalArgumentException(s"Invalid name: $nameData"))
+    else
+      EitherT.rightT(Name(nameData))
 }
 
 final case class Name private (value: String) extends AnyVal
