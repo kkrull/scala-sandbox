@@ -36,17 +36,23 @@ object HelloRoutes {
 
     import dsl._
     HttpRoutes.of[F] { case GET -> Root / "hello_v2" / nameInput =>
-      val maybeGreeting = Name
-        .fromStringAE(nameInput)
-        .flatMap(name => service.greetAE(name))
-        .flatMap(greeting => Ok(greeting))
-
-      FAE.recoverWith(maybeGreeting) {
-        case nameError: IllegalArgumentException =>
-          BadRequest(nameError.getMessage)
-        case serviceError: Exception =>
-          InternalServerError(serviceError.getMessage)
-      }
+      FAE.redeemWith(makeGreetingAE(nameInput, service))(
+        {
+          case nameError: IllegalArgumentException =>
+            BadRequest(nameError.getMessage)
+          case serviceError: Throwable =>
+            InternalServerError(serviceError.getMessage)
+        },
+        (greeting: Greeting) => Ok(greeting),
+      )
     }
   }
+
+  private def makeGreetingAE[F[_]](
+    nameInput: String,
+    service: HelloWorldService[F],
+  )(implicit FAE: ApplicativeError[F, Exception] with Sync[F]): F[Greeting] =
+    Name
+      .fromStringAE(nameInput)
+      .flatMap(name => service.greetAE(name))
 }
