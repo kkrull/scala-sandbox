@@ -1,9 +1,7 @@
 package com.github.kkrull.http4s.greet
 
-import cats.ApplicativeError
-import cats.data.EitherT
+import cats.data._
 import cats.effect.Sync
-import cats.implicits.toFlatMapOps
 import org.http4s.dsl.Http4sDsl
 import org.http4s.{HttpRoutes, Response}
 
@@ -12,58 +10,34 @@ object HelloRoutes {
     service: HelloWorldService[F],
   )(implicit S: Sync[F]): HttpRoutes[F] = {
     val dsl = new Http4sDsl[F] {}
-
     import dsl._
-    HttpRoutes.of[F] { case GET -> Root / "hello_ae" / nameInput =>
-      Ok(Greeting(s"Hello $nameInput"))
+    HttpRoutes.of[F] { case GET -> Root / "hello" / nameInput =>
+      helloResponse(service, nameInput)
     }
   }
 
-  def makeAE[F[_]](
+  private def helloResponse[F[_]](
     service: HelloWorldService[F],
-  )(implicit FAE: ApplicativeError[F, Exception] with Sync[F]): HttpRoutes[F] = {
+    nameInput: String,
+  )(implicit S: Sync[F]): F[Response[F]] = {
     val dsl = new Http4sDsl[F] {}
-
     import dsl._
-    HttpRoutes.of[F] { case GET -> Root / "hello_ae" / nameInput =>
-      FAE.redeemWith(makeGreetingAE(nameInput, service))(
-        {
-          case nameError: IllegalArgumentException =>
-            BadRequest(nameError.getMessage)
-          case serviceError: Throwable =>
-            InternalServerError(serviceError.getMessage)
-        },
-        (greeting: Greeting) => Ok(greeting),
-      )
-    }
-  }
 
-  def makeT[F[_]: Sync](service: HelloWorldService[F]): HttpRoutes[F] = {
-    val dsl = new Http4sDsl[F] {}
+    val greeting = for {
+      name <- EitherT.fromEither(Name.fromString(nameInput))
+      greeting <- service.greetT(name)
+    } yield greeting
 
-    import dsl._
-    HttpRoutes.of[F] { case GET -> Root / "hello_t" / nameInput =>
-      val maybeGreeting = for {
-        name <- Name.fromStringT(nameInput)
-        greeting <- service.greetT(name)
-      } yield Ok(greeting)
-
-      val response: EitherT[F, Exception, F[Response[F]]] = maybeGreeting.recover {
+    greeting.foldF(
+      {
         case nameError: IllegalArgumentException =>
           BadRequest(nameError.getMessage)
-        case serviceError: Exception =>
-          InternalServerError(serviceError.getMessage)
-      }
-
-      response.value.flatMap(_.getOrElse(InternalServerError(s"Impossible case")))
-    }
+        case serverError: Exception =>
+          InternalServerError(s"Server error: ${serverError.getMessage}")
+      },
+      greeting => Ok(greeting),
+    )
   }
 
-  private def makeGreetingAE[F[_]](
-    nameInput: String,
-    service: HelloWorldService[F],
-  )(implicit FAE: ApplicativeError[F, Exception] with Sync[F]): F[Greeting] =
-    Name
-      .fromStringAE(nameInput)
-      .flatMap(name => service.greetAE(name))
+  private def handleError[F[_]](response: EitherT[F, Exception, F[Response[F]]]): F[Response[F]] = ???
 }

@@ -8,7 +8,6 @@ import com.github.kkrull.http4s.joke.{JokeRoutes, Jokes}
 import fs2.io.net.Network
 import org.http4s.ember.client.EmberClientBuilder
 import org.http4s.ember.server.EmberServerBuilder
-import org.http4s.implicits._
 import org.http4s.server.middleware.Logger
 
 class Http4sQuickstartServer[F[_]: Async: Network] {
@@ -20,7 +19,7 @@ class Http4sQuickstartServer[F[_]: Async: Network] {
       jokeAlg = Jokes.impl[F](client)
 
       routerAsHttpApp = (
-        HelloRoutes.makeT[F](helloWorldService)
+        HelloRoutes.make[F](helloWorldService)
           <+> JokeRoutes.make[F](jokeAlg)
       ).orNotFound
 

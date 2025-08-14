@@ -12,7 +12,7 @@ import org.scalatest.matchers.should.Matchers
 class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
   "HelloWorld" - {
     val subject: HttpApp[IO] = HelloRoutes
-      .makeT(HelloWorldService.impl[IO])
+      .make(HelloWorldService.impl[IO])
       .orNotFound
 
     "GET /hello/:name" - {
@@ -40,7 +40,7 @@ class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
 
     def helloRequest(name: String = "world"): Request[IO] = Request[IO](
       Method.GET,
-      uri"/hello_t".addSegment(name),
+      uri"/hello".addSegment(name),
     )
   }
 }
