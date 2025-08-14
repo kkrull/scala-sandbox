@@ -40,7 +40,7 @@ class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
 
     def helloRequest(name: String = "world"): Request[IO] = Request[IO](
       Method.GET,
-      uri"/hello".addSegment(name),
+      uri"/hello_t".addSegment(name),
     )
   }
 }

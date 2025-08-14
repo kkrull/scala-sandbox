@@ -14,7 +14,7 @@ object HelloRoutes {
     val dsl = new Http4sDsl[F] {}
 
     import dsl._
-    HttpRoutes.of[F] { case GET -> Root / "hello_v2" / nameInput =>
+    HttpRoutes.of[F] { case GET -> Root / "hello_ae" / nameInput =>
       FAE.redeemWith(makeGreetingAE(nameInput, service))(
         {
           case nameError: IllegalArgumentException =>
@@ -31,7 +31,7 @@ object HelloRoutes {
     val dsl = new Http4sDsl[F] {}
 
     import dsl._
-    HttpRoutes.of[F] { case GET -> Root / "hello" / nameInput =>
+    HttpRoutes.of[F] { case GET -> Root / "hello_t" / nameInput =>
       val maybeGreeting = for {
         name <- Name.fromStringT(nameInput)
         greeting <- service.greetT(name)
