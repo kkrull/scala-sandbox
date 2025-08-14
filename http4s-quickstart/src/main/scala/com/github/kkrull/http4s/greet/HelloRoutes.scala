@@ -8,6 +8,17 @@ import org.http4s.dsl.Http4sDsl
 import org.http4s.{HttpRoutes, Response}
 
 object HelloRoutes {
+  def make[F[_]](
+    service: HelloWorldService[F],
+  )(implicit S: Sync[F]): HttpRoutes[F] = {
+    val dsl = new Http4sDsl[F] {}
+
+    import dsl._
+    HttpRoutes.of[F] { case GET -> Root / "hello_ae" / nameInput =>
+      Ok(Greeting(s"Hello $nameInput"))
+    }
+  }
+
   def makeAE[F[_]](
     service: HelloWorldService[F],
   )(implicit FAE: ApplicativeError[F, Exception] with Sync[F]): HttpRoutes[F] = {

@@ -1,12 +1,22 @@
 package com.github.kkrull.http4s.greet
 
 import cats.data.EitherT
+import cats.syntax.all._
 import cats.{Applicative, ApplicativeError}
 import io.circe.{Encoder, Json}
 import org.http4s.EntityEncoder
 import org.http4s.circe._
 
 object Name {
+  def fromString[F[_]](
+    nameData: String,
+  ): Either[IllegalArgumentException, Name] =
+    if (nameData.isEmpty)
+      new IllegalArgumentException(s"Invalid name: $nameData").asLeft[Name]
+    else {
+      Name(nameData).asRight[IllegalArgumentException]
+    }
+
   def fromStringAE[F[_]](
     nameData: String,
   )(implicit ae: ApplicativeError[F, Exception]): F[Name] =
