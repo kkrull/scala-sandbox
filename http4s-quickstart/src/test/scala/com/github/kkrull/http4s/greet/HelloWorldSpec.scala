@@ -11,8 +11,8 @@ import org.scalatest.matchers.should.Matchers
 
 class HelloWorldSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
   "HelloWorld" - {
-    val subject: HttpApp[IO] = new HelloRoutes[IO]()
-      .make(HelloWorldService.impl[IO])
+    val subject: HttpApp[IO] = new HelloRoutes[IO](HelloWorldService.impl[IO])
+      .make
       .orNotFound
 
     "GET /hello/:name" - {
