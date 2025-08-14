@@ -1,5 +1,6 @@
 package com.github.kkrull.http4s.greet
 
+import cats.ApplicativeError
 import cats.data.EitherT
 import cats.effect.Sync
 import cats.implicits.toFlatMapOps
@@ -25,6 +26,28 @@ object HelloRoutes {
       }
 
       response.value.flatMap(_.getOrElse(InternalServerError(s"Impossible case")))
+    }
+  }
+
+  def makeAE[F[_]](
+    service: HelloWorldService[F],
+  )(implicit ae: ApplicativeError[F, Exception] with Sync[F]): HttpRoutes[F] = {
+    val dsl = new Http4sDsl[F] {}
+
+    import dsl._
+    HttpRoutes.of[F] { case GET -> Root / "hello_v2" / nameInput =>
+      val maybeGreeting = Name
+        .fromStringAE(nameInput)
+        .flatMap(name => service.greetAE(name))
+        .flatMap(greeting => Ok(greeting))
+
+      val typeClass: ApplicativeError[F, Exception] = ae
+      typeClass.handleErrorWith(maybeGreeting) {
+        case nameError: IllegalArgumentException =>
+          BadRequest(nameError.getMessage)
+        case serviceError: Exception =>
+          InternalServerError(serviceError.getMessage)
+      }
     }
   }
 }
