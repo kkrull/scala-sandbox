@@ -19,7 +19,7 @@ class Http4sQuickstartServer[F[_]: Async: Network] {
       jokeAlg = Jokes.impl[F](client)
 
       routerAsHttpApp = (
-        HelloRoutes.make[F](helloWorldService)
+        new HelloRoutes[F]().make(helloWorldService)
           <+> JokeRoutes.make[F](jokeAlg)
       ).orNotFound
 

@@ -5,10 +5,8 @@ import cats.effect.Sync
 import org.http4s.dsl.Http4sDsl
 import org.http4s.{HttpRoutes, Response}
 
-object HelloRoutes {
-  def make[F[_]](
-    service: HelloWorldService[F],
-  )(implicit S: Sync[F]): HttpRoutes[F] = {
+class HelloRoutes[F[_]: Sync] {
+  def make(service: HelloWorldService[F]): HttpRoutes[F] = {
     val dsl = new Http4sDsl[F] {}
     import dsl._
     HttpRoutes.of[F] { case GET -> Root / "hello" / nameInput =>
@@ -16,10 +14,10 @@ object HelloRoutes {
     }
   }
 
-  private def helloResponse[F[_]](
+  private def helloResponse(
     service: HelloWorldService[F],
     nameInput: String,
-  )(implicit S: Sync[F]): F[Response[F]] = {
+  ): F[Response[F]] = {
     val dsl = new Http4sDsl[F] {}
     import dsl._
 
