@@ -6,21 +6,18 @@ import org.http4s.dsl.Http4sDsl
 import org.http4s.{HttpRoutes, Response}
 
 class HelloRoutes[F[_]: Sync] {
-  def make(service: HelloWorldService[F]): HttpRoutes[F] = {
-    val dsl = new Http4sDsl[F] {}
-    import dsl._
+  private val dsl = new Http4sDsl[F] {}
+  import dsl._
+
+  def make(service: HelloWorldService[F]): HttpRoutes[F] =
     HttpRoutes.of[F] { case GET -> Root / "hello" / nameInput =>
       helloResponse(service, nameInput)
     }
-  }
 
   private def helloResponse(
     service: HelloWorldService[F],
     nameInput: String,
   ): F[Response[F]] = {
-    val dsl = new Http4sDsl[F] {}
-    import dsl._
-
     def handleError: PartialFunction[Exception, F[Response[F]]] = {
       case nameError: IllegalArgumentException =>
         BadRequest(nameError.getMessage)
