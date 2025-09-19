@@ -1,18 +1,18 @@
 package catseffect.lectures.part2effects
 
-import cats.effect.IO
+import cats.effect.{ExitCode, IO, IOApp}
 
 import scala.util.{Failure, Success, Try}
 
-object IOErrorHandling {
+object IOErrorHandling extends IOApp {
 
   // Create failed effects
   val aFailedCompute: IO[Int] = IO.delay(throw new RuntimeException("bang!"))
   val aFailure: IO[Int] = IO.raiseError(new RuntimeException("proper failure"))
 
   // handle exceptions
-  val dealWithIt = aFailure.handleErrorWith {
-    case _: RuntimeException => IO.delay(println("I'm still here"))
+  val dealWithIt = aFailure.handleErrorWith { case _: RuntimeException =>
+    IO.delay(println("I'm still here"))
   }
 
   // turn it into an Either
@@ -20,7 +20,7 @@ object IOErrorHandling {
   val resultAsString = aFailure.redeem(ex => s"FAIL: ${ex}", value => s"SUCCESS: ${value}")
   val resultAsEffect = aFailure.redeemWith(
     ex => IO(println(s"FAIL: $ex")),
-    value => IO(println(s"SUCCESS: $value"))
+    value => IO(println(s"SUCCESS: $value")),
   )
 
   /* Exercises */
@@ -29,7 +29,7 @@ object IOErrorHandling {
 
   def option2IO[A](option: Option[A])(ifEmpty: Throwable): IO[A] =
     option match {
-      case None => IO.raiseError[A](ifEmpty)
+      case None        => IO.raiseError[A](ifEmpty)
       case Some(value) => IO.pure(value)
     }
 
@@ -38,7 +38,7 @@ object IOErrorHandling {
 
   def try2IO[A](aTry: Try[A]): IO[A] =
     aTry match {
-      case Success(value) => IO.pure(value)
+      case Success(value)     => IO.pure(value)
       case Failure(exception) => IO.raiseError[A](exception)
     }
 
@@ -47,7 +47,7 @@ object IOErrorHandling {
 
   def either2IO[A](anEither: Either[Throwable, A]): IO[A] =
     anEither match {
-      case Left(error) => IO.raiseError[A](error)
+      case Left(error)  => IO.raiseError[A](error)
       case Right(value) => IO.pure(value)
     }
 
@@ -62,8 +62,6 @@ object IOErrorHandling {
   def handleIOErrorWith[A](io: IO[A])(handler: Throwable => IO[A]): IO[A] =
     io.redeemWith(handler, IO.pure)
 
-  def main(args: Array[String]): Unit = {
-    import cats.effect.unsafe.implicits.global
-    println(resultAsEffect.unsafeRunSync())
-  }
+  override def run(args: List[String]): IO[ExitCode] =
+    resultAsEffect.as(ExitCode.Success)
 }

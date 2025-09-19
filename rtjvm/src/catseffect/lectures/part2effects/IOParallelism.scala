@@ -3,6 +3,8 @@ package catseffect.lectures.part2effects
 import cats.Parallel
 import cats.effect.{IO, IOApp}
 
+import scala.concurrent.duration.DurationInt
+
 object IOParallelism extends IOApp.Simple {
   val aniIO = IO(s"[${Thread.currentThread().getName}] Ani")
   val kamranIO = IO(s"[${Thread.currentThread().getName}] Kamran")
@@ -19,14 +21,17 @@ object IOParallelism extends IOApp.Simple {
   // Run sequentially
 
   import cats.syntax.apply._
-  val goalInLife = (meaningOfLife, favLang).mapN((num, string) => s"My goal in life is $num and $string")
+  val goalInLife = (meaningOfLife, favLang)
+    .mapN((num, string) => s"My goal in life is $num and $string")
 
   // Define parallel IOs
 
   val parIO1: IO.Par[Int] = Parallel[IO].parallel(meaningOfLife.debug)
   val parIO2: IO.Par[String] = Parallel[IO].parallel(favLang.debug)
+
   import cats.effect.implicits._
-  val goalInLifePar: IO.Par[String] = (parIO1, parIO2).mapN((num, string) => s"My goal in life is $num and $string")
+  val goalInLifePar: IO.Par[String] = (parIO1, parIO2)
+    .mapN((num, string) => s"My goal in life is $num and $string")
 
   // Convert back to sequential so we can run it
   val goalInLife_v2 = Parallel[IO].sequential(goalInLifePar)
@@ -34,7 +39,8 @@ object IOParallelism extends IOApp.Simple {
   // Do it all in one
 
   import cats.syntax.parallel._
-  val goalInLife_v3: IO[String] = (meaningOfLife.debug, favLang.debug).parMapN((num, string) => s"I says mah goal in life is $num and $string")
+  val goalInLife_v3: IO[String] = (meaningOfLife.debug, favLang.debug)
+    .parMapN((num, string) => s"I says mah goal in life is $num and $string")
 
   // Make it fail
 
@@ -44,8 +50,8 @@ object IOParallelism extends IOApp.Simple {
   val anotherFailure = IO.raiseError[String](new RuntimeException("boom!"))
   val twoFailures: IO[String] = (aFailure.debug, anotherFailure.debug).parMapN(_ + _)
   val twoFailuresDelayed: IO[String] = (
-    IO(Thread.sleep(1000)) >> aFailure.debug,
-    anotherFailure.debug
+    IO.sleep(1000.seconds) >> aFailure.debug,
+    anotherFailure.debug,
   ).parMapN(_ + _)
 
   override def run: IO[Unit] =

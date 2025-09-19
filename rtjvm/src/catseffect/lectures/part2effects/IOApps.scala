@@ -25,5 +25,10 @@ object FirstCEApp extends IOApp {
 
   override def run(args: List[String]) =
     program.as(ExitCode.Success)
+}
 
+object SecondCEApp extends IOApp.Simple {
+  import IOApps._
+
+  override def run: IO[Unit] = program
 }
