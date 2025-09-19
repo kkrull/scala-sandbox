@@ -3,7 +3,7 @@ package catseffect.lectures.part2effects
 import cats.Traverse
 import cats.effect.{IO, IOApp}
 import cats.implicits.toTraverseOps
-import utils._
+import catseffect.utils.DebugWrapper
 
 import scala.concurrent.Future
 import scala.util.Random

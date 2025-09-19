@@ -6,8 +6,9 @@ import scala.io.StdIn
 
 object IOApps {
   val program = for {
+    _ <- IO.println("Say something: ")
     line <- IO(StdIn.readLine())
-    _ <- IO(println(s"You just wrote $line"))
+    _ <- IO.println(s"You just wrote $line")
   } yield ()
 }
 

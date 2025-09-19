@@ -2,6 +2,7 @@ package catseffect.lectures.part2effects
 
 import cats.Parallel
 import cats.effect.{IO, IOApp}
+import catseffect.utils.DebugWrapper
 
 import scala.concurrent.duration.DurationInt
 
@@ -13,8 +14,6 @@ object IOParallelism extends IOApp.Simple {
     ani <- aniIO
     kamran <- kamranIO
   } yield s"$ani and $kamran do their thing"
-
-  import utils._
   val meaningOfLife: IO[Int] = IO.delay(42)
   val favLang: IO[String] = IO.delay("Scala")
 

@@ -1,4 +1,4 @@
-package playground
+package scala2basics.playground
 
 object ScalaPlayground {
   def main(args: Array[String]): Unit = {

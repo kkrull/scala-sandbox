@@ -1,3 +1,5 @@
+package catseffect
+
 import cats.effect.IO
 
 package object utils {

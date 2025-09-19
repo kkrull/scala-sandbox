@@ -1,4 +1,4 @@
-package playground;
+package scala2basics.playground;
 
 public class JavaPlayground {
     public static void main(String[] args) {
