@@ -1,6 +1,8 @@
 package catseffect.lectures.part3concurrency
 import cats.effect.{IO, IOApp}
 
+import java.io.{File, FileReader}
+import java.util.Scanner
 import scala.concurrent.duration.DurationInt
 
 object Resources extends IOApp.Simple {
@@ -23,7 +25,7 @@ object Resources extends IOApp.Simple {
   } yield ()
 
   // bracket pattern
-  
+
   val bracketFetchUrl = IO(new Connection("rockthejvm.com"))
     .bracket(conn => conn.open() *> IO.never)(conn => conn.close().void)
 
@@ -32,5 +34,18 @@ object Resources extends IOApp.Simple {
     _ <- IO.sleep(1.second) *> theFiber.cancel
   } yield ()
 
-  override def run: IO[Unit] = bracketProgram.void
+  // Exercise
+  def openFileScanner(path: String): IO[Scanner] =
+    IO(new Scanner(new FileReader(new File(path))))
+
+  def bracketReadFile(path: String): IO[Unit] =
+    openFileScanner(path).bracket { scanner =>
+      def doOneLine(): IO[Unit] =
+        if (!scanner.hasNext()) IO.unit
+        else IO.println(scanner.nextLine()) >> doOneLine()
+
+      doOneLine()
+    }(scanner => IO(scanner.close()).void)
+
+  override def run: IO[Unit] = bracketReadFile(".gitignore").void
 }
